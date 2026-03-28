@@ -1553,23 +1553,27 @@ Enter as: Surname, First Name
         <select id="inv-room-select" onchange="handleRoomChange(this.value)" class="inv-header-select inv-top-field"></select>
     </div>
 <div class="col-span-1">
-    <label class="mini-label">Item Qty</label>
-    <input
-        type="text"
-        id="inv-qty"
-        class="qty-header-box"
-        value="1"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        onclick="this.select()"
-        onfocus="this.select()"
-        oninput="updateLastItemQty(this.value)"
-    >
+    <div class="inventory-stat-box">
+        <div class="inventory-stat-mini">Item Qty</div>
+        <input
+            type="text"
+            id="inv-qty"
+            class="inventory-stat-input"
+            value="1"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            onclick="this.select()"
+            onfocus="this.select()"
+            oninput="updateLastItemQty(this.value)"
+        >
+    </div>
 </div>
     <div class="col-span-1">
-        <label class="mini-label">Total Vol</label>
-        <div id="inv-total-volume" class="total-vol-box inv-top-field text-lg font-black">0</div>
+    <div class="inventory-stat-box">
+        <div class="inventory-stat-mini">Total Vol</div>
+        <div id="inv-total-volume" class="inventory-stat-value">0</div>
     </div>
+</div>
 </div>
 
 
