@@ -2249,11 +2249,16 @@ const DEFAULT_FLOORS = [
     "Outside"
 ];
 const BOX_VOLUMES = {
-    "AP": 4,
-    "CG": 4,
-    "BOOK": 2,
-    "LINEN": 5,
-    "WR": 10
+    AP: 4,
+    CG: 4,
+    BOOK: 2,
+    LINEN: 5,
+    WR: 10,
+    ap: 4,
+    cg: 4,
+    books: 2,
+    linen: 5,
+    wr: 10
 };
 
 const furnitureDB = [
@@ -6645,7 +6650,9 @@ const TASK_OPTIONS = [
     "Load and Travel",
     "Deliver and Crew Return"
 ];
-
+function createId(){
+    return `day_${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
+}
 let manualSchedule = [
     { id: createId(), groupId: createId(), dayPart: "Full Day", task: "Pack", men: 2, hours: 8 }
 ];
@@ -7223,16 +7230,14 @@ function renderScheduleCalculator(){
     renderSchedulePlanner();
     renderValidation(packing, loading, unloading, special, state);
 }
-
 renderScheduleCalculator();
-</script>
-</body>
-</html>
+
 window.onload = function () {
     ensureScheduleDataShape();
     saveToDevice();
     renderDashboard();
-};  
+    renderScheduleCalculator();
+};
 </script>
 <!-- DAMAGE MODAL -->
 <div id="damage-overlay" class="damage-overlay" onclick="closeDamageModal()">
@@ -7255,12 +7260,13 @@ window.onload = function () {
 
         <div id="damage-error-text" class="modal-error-text"></div>
 
-<div class="damage-actions">
-    <button type="button" class="damage-cancel-btn" onclick="closeDamageModal()">Cancel</button>
-    <button type="button" class="damage-save-btn" onclick="saveDamageModal()">Save Damage</button>
-</div>
+        <div class="damage-actions">
+            <button type="button" class="damage-cancel-btn" onclick="closeDamageModal()">Cancel</button>
+            <button type="button" class="damage-save-btn" onclick="saveDamageModal()">Save Damage</button>
+        </div>
     </div>
 </div>
+
 <!-- MISC MODAL -->
 <div id="misc-overlay" class="misc-overlay" onclick="closeMiscModal()">
     <div class="misc-panel" onclick="event.stopPropagation()">
@@ -7297,6 +7303,7 @@ window.onload = function () {
         </div>
     </div>
 </div>
+
 <!-- NOTE MODAL -->
 <div id="note-overlay" class="note-overlay" onclick="closeNoteModal()">
     <div class="note-panel" onclick="event.stopPropagation()">
@@ -7317,6 +7324,7 @@ window.onload = function () {
         </div>
     </div>
 </div>
+
 <!-- CRATE MODAL -->
 <div id="crate-overlay" class="crate-overlay" onclick="closeCrateModal()">
     <div class="crate-panel" onclick="event.stopPropagation()">
@@ -7377,6 +7385,4 @@ window.onload = function () {
     </div>
 </div>
 </body>
-
 </html>
-  
