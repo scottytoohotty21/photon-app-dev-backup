@@ -8,6 +8,31 @@
     <link rel="stylesheet" href="./tailwind-local.css">
    
     <style>
+:root{
+    --card:#ffffff;
+    --navy:#0f172a;
+    --navy-2:#1e293b;
+    --blue:#3b82f6;
+    --blue-2:#2563eb;
+    --blue-50:#eff6ff;
+    --slate-50:#f8fafc;
+    --slate-100:#f1f5f9;
+    --slate-200:#e2e8f0;
+    --slate-300:#cbd5e1;
+    --slate-400:#94a3b8;
+    --slate-500:#64748b;
+    --slate-700:#334155;
+    --green-50:#f0fdf4;
+    --green-200:#bbf7d0;
+    --green-800:#166534;
+    --amber-50:#fff7ed;
+    --amber-200:#fed7aa;
+    --amber-800:#c2410c;
+    --red-50:#fef2f2;
+    --red-200:#fecaca;
+    --red-800:#b91c1c;
+    --shadow:0 10px 30px rgba(15,23,42,0.08);
+}
 
 @font-face {
     font-family: 'Inter';
@@ -1618,7 +1643,63 @@ button {
     align-self: start;
     background: #ffffff;
 }
-</style>
+/* SCHEDULE CALCULATOR LAYOUT */
+.layout{display:grid;grid-template-columns:430px 1fr;gap:16px;align-items:start;}
+.panel{
+    background:var(--card);border:1px solid var(--slate-200);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;
+}
+.panel-head{background:var(--navy);padding:14px 16px;border-bottom:1px solid var(--navy-2);}
+.panel-title{color:#fff;font-size:12px;font-weight:900;text-transform:uppercase;}
+.panel-subtitle{color:#93c5fd;font-size:10px;font-weight:800;text-transform:uppercase;margin-top:4px;}
+.panel-body{padding:16px;}
+.section-block{border:1px solid var(--slate-200);border-radius:16px;padding:14px;background:var(--slate-50);}
+.section-block + .section-block{margin-top:14px;}
+.section-title{font-size:11px;font-weight:900;text-transform:uppercase;color:var(--navy);margin-bottom:12px;}
+.field{
+    width:100%;border:1.5px solid var(--slate-300);border-radius:10px;padding:11px 12px;
+    font-size:14px;font-weight:700;outline:none;background:#fff;color:var(--navy);
+}
+.field:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,0.08);}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;}
+.summary-card{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:16px;min-height:128px;}
+.summary-label{font-size:10px;font-weight:900;text-transform:uppercase;color:var(--slate-400);margin-bottom:8px;line-height:1.35;}
+.summary-value{font-size:30px;font-weight:900;line-height:1;color:var(--navy);}
+.summary-sub{font-size:10px;font-weight:800;text-transform:uppercase;color:var(--slate-500);margin-top:8px;line-height:1.35;}
+.note-card{
+    background:var(--blue-50);border:1px solid #bfdbfe;color:#1d4ed8;border-radius:14px;padding:12px 14px;
+    font-size:11px;font-weight:800;text-transform:uppercase;line-height:1.45;
+}
+.info-card{background:#fff;border:1px solid var(--slate-200);border-radius:16px;padding:14px;}
+.info-head{font-size:10px;font-weight:900;text-transform:uppercase;color:var(--slate-400);margin-bottom:8px;}
+.info-body{font-size:12px;font-weight:700;color:var(--slate-700);line-height:1.55;}
+.footer-note{margin-top:12px;font-size:10px;font-weight:800;text-transform:uppercase;color:var(--slate-400);line-height:1.45;}
+.schedule-shell{margin-top:12px;border:1px solid var(--slate-200);border-radius:16px;padding:14px;background:var(--slate-50);}
+.schedule-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+.schedule-title{font-size:10px;font-weight:900;text-transform:uppercase;color:var(--slate-400);}
+.schedule-btn{height:38px;border-radius:10px;border:1px solid var(--slate-300);background:#fff;color:var(--slate-700);padding:0 14px;font-size:11px;font-weight:900;text-transform:uppercase;cursor:pointer;}
+.schedule-list{display:grid;gap:12px;}
+.schedule-row{border:1px solid var(--slate-200);border-radius:14px;background:#fff;padding:12px;}
+.schedule-row-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;}
+.schedule-row-title{font-size:11px;font-weight:900;text-transform:uppercase;color:var(--navy);}
+.schedule-remove{height:32px;border-radius:8px;border:1px solid var(--red-200);background:var(--red-50);color:var(--red-800);padding:0 10px;font-size:10px;font-weight:900;text-transform:uppercase;cursor:pointer;}
+.schedule-grid{display:grid;grid-template-columns:1.2fr 1.2fr .8fr .8fr;gap:10px;}
+.validation-list{display:grid;gap:8px;margin-top:12px;}
+.validation-item{border-radius:12px;padding:10px 12px;font-size:11px;font-weight:800;text-transform:uppercase;line-height:1.4;}
+.validation-ok{background:var(--green-50);border:1px solid var(--green-200);color:var(--green-800);}
+.validation-warn{background:var(--amber-50);border:1px solid var(--amber-200);color:var(--amber-800);}
+.validation-error{background:var(--red-50);border:1px solid var(--red-200);color:var(--red-800);}
+
+@media (max-width: 980px){
+    .layout{grid-template-columns:1fr;}
+    .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width: 760px){
+    .schedule-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width: 680px){
+    .summary-grid,.grid-2,.schedule-grid{grid-template-columns:1fr;}
+}
     </style>
 </head>
 <body class="p-4 pb-12">
@@ -1900,71 +1981,240 @@ Enter as: Surname, First Name
 <div id="listed-footer-summary" class="grid grid-cols-2 gap-3 mt-4"></div>
 </section>
    <section id="content-schedule" class="tab-content hidden bg-white p-6 rounded-2xl shadow-inner">
+    <div class="layout">
+        <div class="panel">
+            <div class="panel-head">
+                <div class="panel-title">Inputs</div>
+                <div class="panel-subtitle">Manual for now, ready to be fed from the previous app tab later</div>
+            </div>
+            <div class="panel-body">
+                <div class="section-block">
+                    <div class="section-title">Sequence</div>
+                    <div>
+                        <label class="mini-label">Sequence</label>
+                        <div id="sequenceLabelDisplay" class="field" style="background:#f8fafc;">—</div>
+                    </div>
+                </div>
 
-<div class="grid grid-cols-2 gap-4 mb-6">
+                <div class="section-block">
+                    <div class="section-title">Transit Time</div>
+                    <div class="grid-2">
+                        <div>
+                            <label class="mini-label">Transit Hours</label>
+                            <input id="transitHours" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Transit Minutes</label>
+                            <input id="transitMinutes" type="number" min="0" max="59" class="field" value="30" oninput="renderScheduleCalculator()" />
+                        </div>
+                    </div>
+                </div>
 
-<div>
-<label class="mini-label">Move Date</label>
-<input type="date" id="move-date" class="input-field">
-</div>
+                <div class="section-block">
+                    <div class="section-title">Volume Inputs</div>
+                    <div class="grid-2">
+                        <div>
+                            <label class="mini-label">Furniture Volume (CUFT)</label>
+                            <div id="furnitureVolDisplay" class="field" style="background:#f8fafc;">0</div>
+                        </div>
+                        <div>
+                            <label class="mini-label">Loft Effects Volume (CUFT)</label>
+                            <input id="loftVol" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Loading Rate (CUFT / Man-Hour)</label>
+                            <input id="loadRate" type="number" min="1" class="field" value="125" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Unloading Rate (CUFT / Man-Hour)</label>
+                            <input id="unloadRate" type="number" min="1" class="field" value="132" oninput="renderScheduleCalculator()" />
+                        </div>
+                    </div>
+                </div>
 
-<div>
-<label class="mini-label">Crew Size</label>
-<select id="crew-size" class="input-field">
-<option>2 Men</option>
-<option>3 Men</option>
-<option>4 Men</option>
-<option>5 Men</option>
-</select>
-</div>
+                <div class="section-block">
+                    <div class="section-title">Box Totals</div>
+                    <div class="grid-2">
+                        <div>
+                            <label class="mini-label">AP (All Purpose)</label>
+                            <div id="qty_ap_display" class="field" style="background:#f8fafc;">0</div>
+                        </div>
+                        <div>
+                            <label class="mini-label">CG (China & Glassware)</label>
+                            <div id="qty_cg_display" class="field" style="background:#f8fafc;">0</div>
+                        </div>
+                        <div>
+                            <label class="mini-label">Book Cartons</label>
+                            <div id="qty_books_display" class="field" style="background:#f8fafc;">0</div>
+                        </div>
+                        <div>
+                            <label class="mini-label">Linen Cartons</label>
+                            <div id="qty_linen_display" class="field" style="background:#f8fafc;">0</div>
+                        </div>
+                        <div>
+                            <label class="mini-label">WR (Wardrobe)</label>
+                            <div id="qty_wr_display" class="field" style="background:#f8fafc;">0</div>
+                        </div>
+                    </div>
+                </div>
 
-<div>
-<label class="mini-label">Vehicle</label>
-<select id="vehicle-type" class="input-field">
-<option>Transit</option>
-<option>Luton</option>
-<option>7.5 Tonne</option>
-<option>12 Tonne</option>
-</select>
-</div>
+                <div class="section-block">
+                    <div class="section-title">Special Labour Inputs</div>
+                    <div class="grid-2">
+                        <div>
+                            <label class="mini-label">Frame Beds</label>
+                            <input id="svc_frame" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Bunk Beds</label>
+                            <input id="svc_bunk" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Custom Item Minutes (each side)</label>
+                            <input id="svc_custom_minutes" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Custom Item Note</label>
+                            <input id="svc_custom_note" type="text" maxlength="40" class="field" value="" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Upright Pianos</label>
+                            <input id="svc_upright" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Baby / Grand Pianos</label>
+                            <input id="svc_grand" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Grandfather Clocks</label>
+                            <input id="svc_clock" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Washing Machines / Dishwashers</label>
+                            <input id="svc_appliance" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Crating</label>
+                            <input id="svc_crate" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                        <div>
+                            <label class="mini-label">Export Wrap Volume (CUFT)</label>
+                            <input id="exportWrapVol" type="number" min="0" class="field" value="0" oninput="renderScheduleCalculator()" />
+                        </div>
+                    </div>
+                </div>
 
-<div>
-<label class="mini-label">Estimated Hours</label>
-<input type="number" id="move-hours" class="input-field" value="8">
-</div>
+                <div class="note-card">
+                    Sequence, packing and inventory totals are now intended to be fed from Photon. Transit, labour assumptions and planner rows remain editable here.
+                </div>
+            </div>
+        </div>
 
-</div>
+        <div class="panel">
+            <div class="panel-head">
+                <div class="panel-title">Live Results</div>
+                <div class="panel-subtitle">Three rows: packing, loading, then unloading</div>
+            </div>
+            <div class="panel-body">
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="summary-label">Packing Mode</div>
+                        <div class="summary-value" id="summaryMode">—</div>
+                        <div class="summary-sub">No packing, CG packing, or full packing</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Total Volume</div>
+                        <div class="summary-value" id="summaryTotalVolume">0</div>
+                        <div class="summary-sub">Furniture + box volume</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Packing Man Hrs</div>
+                        <div class="summary-value" id="summaryPackHours">0.00</div>
+                        <div class="summary-sub">Cartons only</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Packing Man Days</div>
+                        <div class="summary-value" id="summaryPackDays">0.0</div>
+                        <div class="summary-sub">Based on 8 hours per day</div>
+                    </div>
 
-<div class="border-t pt-6 grid grid-cols-2 gap-4">
+                    <div class="summary-card">
+                        <div class="summary-label">Special Labour Hrs</div>
+                        <div class="summary-value" id="summarySpecialHours">0.00</div>
+                        <div class="summary-sub">Beds, pianos, clocks, loft and wrap</div>
+                    </div>
 
-<div>
-<label class="mini-label">Crew Cost (£)</label>
-<input type="number" id="crew-cost" class="input-field" value="0">
-</div>
+                    <div class="summary-card">
+                        <div class="summary-label">Loading Man Hrs</div>
+                        <div class="summary-value" id="summaryLoadHours">0.00</div>
+                        <div class="summary-sub">Volume loading plus load-side specials</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Loading Man Days</div>
+                        <div class="summary-value" id="summaryLoadDays">0.0</div>
+                        <div class="summary-sub">Based on 8 hours per day</div>
+                    </div>
 
-<div>
-<label class="mini-label">Vehicle Cost (£)</label>
-<input type="number" id="vehicle-cost" class="input-field" value="0">
-</div>
+                    <div class="summary-card">
+                        <div class="summary-label">If Loaded By Completion</div>
+                        <div class="summary-value" id="summaryLoadCompletion">0.0</div>
+                        <div class="summary-sub">Men needed for a 4-hour loading window</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Loading Rate</div>
+                        <div class="summary-value" id="summaryLoadRate">125</div>
+                        <div class="summary-sub">Cuft per man-hour</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Unloading Man Hours</div>
+                        <div class="summary-value" id="summaryUnloadHours">0.00</div>
+                        <div class="summary-sub">Volume unloading plus unload-side specials</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Unloading Man Days</div>
+                        <div class="summary-value" id="summaryUnloadDays">0.0</div>
+                        <div class="summary-sub">Based on 8 hours per day</div>
+                    </div>
 
-<div>
-<label class="mini-label">Other Costs (£)</label>
-<input type="number" id="other-costs" class="input-field" value="0">
-</div>
+                    <div class="summary-card">
+                        <div class="summary-label">If Delivering On Completion</div>
+                        <div class="summary-value" id="summaryUnloadCompletion">0.0</div>
+                        <div class="summary-sub">Men needed for a 4-hour unloading window</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">Unloading Rate</div>
+                        <div class="summary-value" id="summaryUnloadRate">132</div>
+                        <div class="summary-sub">Cuft per man-hour</div>
+                    </div>
+                </div>
 
-<div>
-<label class="mini-label">Total Job Cost (£)</label>
-<input type="number" id="total-cost" class="input-field bg-slate-100" readonly>
-</div>
+                <div style="height:12px"></div>
 
-</div>
+                <div class="info-card">
+                    <div class="info-head">Current Logic</div>
+                    <div class="info-body" id="logicText"></div>
+                </div>
 
-<div class="mt-6">
-<button onclick="calculateMoveCost()" class="bg-blue-600 text-white px-6 py-3 rounded-xl font-black text-sm uppercase">
-Calculate Cost
-</button>
-</div>
+                <div style="height:12px"></div>
 
+                <div class="info-card">
+                    <div class="info-head">Special Labour Breakdown</div>
+                    <div class="info-body" id="specialText"></div>
+                </div>
+
+                <div class="schedule-shell">
+                    <div class="schedule-toolbar">
+                        <div class="schedule-title">Manual Schedule Planner</div>
+                        <button class="schedule-btn" onclick="addScheduleDay()">Add Day</button>
+                    </div>
+                    <div class="schedule-list" id="scheduleList"></div>
+                    <div class="validation-list" id="validationList"></div>
+                </div>
+
+                <div class="footer-note">Packing, loading and unloading remain separate streams in this version. The 4-hour completion figures show the crew needed to complete that activity within a half-day completion window.</div>
+            </div>
+        </div>
+    </div>
 </section>
     </main>
 
@@ -2135,6 +2385,27 @@ const inventoryCategories = {
         "Dustbin"
     ]
 };
+function createEmptySequenceSchedule() {
+    return {
+        moveDate: "",
+        transitHours: 0,
+        transitMinutes: 30,
+        loadRate: 125,
+        unloadRate: 132,
+        manualDays: [],
+        special: {
+            frameBeds: 0,
+            bunkBeds: 0,
+            uprightPianos: 0,
+            grandPianos: 0,
+            grandfatherClocks: 0,
+            appliances: 0,
+            cratingItems: 0,
+            customItemMinutes: 0,
+            customItemNote: ""
+        }
+    };
+}
         function createEmptyJob(overrides = {}) {
     const now = new Date().toISOString();
     const defaultProperties = createDefaultProperties();
@@ -2306,6 +2577,25 @@ function saveInventoryContext() {
         function saveToDevice() {
             localStorage.setItem('photon_jobs', JSON.stringify(jobs));
         }
+        function ensureScheduleDataShape() {
+    jobs.forEach(function(job) {
+        if (!Array.isArray(job.sequences)) return;
+
+        job.sequences.forEach(function(seq) {
+            if (!seq.schedule) {
+                seq.schedule = createEmptySequenceSchedule();
+            }
+
+            if (!Array.isArray(seq.schedule.manualDays)) {
+                seq.schedule.manualDays = [];
+            }
+
+            if (!seq.schedule.special) {
+                seq.schedule.special = createEmptySequenceSchedule().special;
+            }
+        });
+    });
+}
 
 function getLockButtonContent(isLocked) {
     const iconColor = isLocked ? "#dc2626" : "#22c55e";
@@ -2399,14 +2689,15 @@ document.getElementById('hdr-ref').innerText =
 if (!currentJob.sequences || currentJob.sequences.length === 0) {
     const id = Date.now();
     currentJob.sequences.push({
-        id: id,
-        moveType: "",
-        packOption: "",
-        vol: 0,
-        isSaved: false,
-        collections: [currentJob.properties[0].id],
-        deliveries: [currentJob.properties[1] ? currentJob.properties[1].id : currentJob.properties[0].id]
-    });
+    id: id,
+    moveType: "",
+    packOption: "",
+    vol: 0,
+    isSaved: false,
+    collections: [currentJob.properties[0].id],
+    deliveries: [currentJob.properties[1] ? currentJob.properties[1].id : currentJob.properties[0].id],
+    schedule: createEmptySequenceSchedule()
+});
     activeSeqId = id;
 } else {
     setActiveSequenceToDefault();
@@ -2434,7 +2725,9 @@ renderInventoryRoomDropdown();
 renderInventoryFloorDropdown();
 renderInventoryButtons();
 rebuildLiveInventoryFromSequence(activeSeqId);
-saveToDevice();}
+saveCalculatorFeedForActiveSequence();
+saveToDevice();
+}
 
         function renderAddressUI() {
          const prop = currentJob.properties.find(p => p.id === activePropId);
@@ -2756,6 +3049,7 @@ function toggleItemAction(actionName) {
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
     triggerHaptic("light");
+    saveCalculatorFeedForActiveSequence();
 }
 
 function removeRawInventoryEntry(rawEntryId) {
@@ -2775,6 +3069,110 @@ function removeRawInventoryEntry(rawEntryId) {
     return currentJob.inventory.items.filter(function(entry) {
         return String(entry.sequenceId) === String(sequenceId);
     });
+}
+function getSequencePackOptionForCalculator(sequence) {
+    const raw = String(sequence && sequence.packOption ? sequence.packOption : "").toLowerCase();
+
+    if (
+        raw.includes("fragile") ||
+        raw.includes("china") ||
+        raw.includes("glass") ||
+        raw.includes("kitchenware")
+    ) {
+        return "cg";
+    }
+
+    if (
+        raw.includes("full")
+    ) {
+        return "full";
+    }
+
+    return "none";
+}
+
+function buildCalculatorFeedForSequence(sequenceId) {
+    if (!currentJob) return null;
+
+    const sequence = currentJob.sequences.find(function(seq) {
+        return String(seq.id) === String(sequenceId);
+    });
+
+    if (!sequence) return null;
+
+    const rawItems = getRawInventoryItemsForSequence(sequenceId);
+
+    let furnitureVol = 0;
+    const qty = {
+        ap: 0,
+        cg: 0,
+        books: 0,
+        linen: 0,
+        wr: 0
+    };
+
+    rawItems.forEach(function(entry) {
+        if (entry.excluded) return;
+
+        const itemName = String(entry.itemName || "").toUpperCase().trim();
+        const entryQty = Number(entry.qty || 0);
+        const unitVolume = Number(entry.unitVolume || 0);
+        const totalVolume = Number(entry.totalVolume || 0);
+
+        if (itemName === "AP BOX") {
+            qty.ap += entryQty;
+            return;
+        }
+
+        if (itemName === "CG BOX") {
+            qty.cg += entryQty;
+            return;
+        }
+
+        if (itemName === "BOOK BOX") {
+            qty.books += entryQty;
+            return;
+        }
+
+        if (itemName === "LINEN BOX") {
+            qty.linen += entryQty;
+            return;
+        }
+
+        if (itemName === "WR BOX") {
+            qty.wr += entryQty;
+            return;
+        }
+
+        furnitureVol += totalVolume || (unitVolume * entryQty);
+    });
+
+    const seqIndex = currentJob.sequences.findIndex(function(seq) {
+        return String(seq.id) === String(sequenceId);
+    });
+
+    return {
+        jobId: currentJob.id,
+        sequenceId: sequence.id,
+        sequenceLabel: "Sequence " + (seqIndex + 1),
+        packOption: getSequencePackOptionForCalculator(sequence),
+        furnitureVol: Math.round(furnitureVol * 100) / 100,
+        qty: qty,
+        createdAt: new Date().toISOString()
+    };
+}
+
+function saveCalculatorFeedForActiveSequence() {
+    if (!currentJob || !activeSeqId) return;
+
+    const feed = buildCalculatorFeedForSequence(activeSeqId);
+    if (!feed) return;
+
+    localStorage.setItem("photon_calculator_feed", JSON.stringify(feed));
+
+    if (typeof renderScheduleCalculator === "function") {
+        renderScheduleCalculator();
+    }
 }
 
 function rebuildLiveInventoryFromSequence(sequenceId) {
@@ -3256,6 +3654,7 @@ function saveSimpleInputModal() {
         triggerInventoryPulse("total", "blue");
         triggerHaptic("medium");
         updateUndoButtonState();
+        saveCalculatorFeedForActiveSequence();
 
         closeSimpleInputModal();
         return;
@@ -3425,7 +3824,16 @@ function renderDashboard() {
 
         function addSequence() {
             const id = Date.now();
-            currentJob.sequences.push({ id: id, moveType: "", packOption: "", vol: 0, isSaved: false, collections: [currentJob.properties[0].id], deliveries: [currentJob.properties[1] ? currentJob.properties[1].id : currentJob.properties[0].id] });
+            currentJob.sequences.push({
+    id: id,
+    moveType: "",
+    packOption: "",
+    vol: 0,
+    isSaved: false,
+    collections: [currentJob.properties[0].id],
+    deliveries: [currentJob.properties[1] ? currentJob.properties[1].id : currentJob.properties[0].id],
+    schedule: createEmptySequenceSchedule()
+});
             activeSeqId = id;
 renderSequenceUI();
 renderInventorySequenceDropdown();
@@ -3435,7 +3843,15 @@ saveToDevice();
         function copySequence() {
             const original = currentJob.sequences.find(s => s.id == activeSeqId);
             const copy = JSON.parse(JSON.stringify(original));
+            copy.schedule = copy.schedule || createEmptySequenceSchedule();
             copy.id = Date.now(); copy.isSaved = false;
+            copy.schedule.manualDays = Array.isArray(copy.schedule.manualDays)
+    ? copy.schedule.manualDays.map(day => ({
+        ...day,
+        id: "day_" + Date.now() + "_" + Math.random().toString(36).slice(2,7),
+        groupId: day.groupId || ("grp_" + Date.now() + "_" + Math.random().toString(36).slice(2,7))
+    }))
+    : [];
             currentJob.sequences.push(copy);
 activeSeqId = copy.id;
 renderSequenceUI();
@@ -3531,6 +3947,7 @@ function updatePropData(f, v) {
 
     saveInventoryContext();
     rebuildLiveInventoryFromSequence(activeSeqId);
+    saveCalculatorFeedForActiveSequence();
     saveToDevice();
 }
         function triggerPulse(id) { const el = document.getElementById(id); if(el) { el.classList.remove('pulse-new'); void el.offsetWidth; el.classList.add('pulse-new'); } }
@@ -3592,6 +4009,7 @@ function updatePropData(f, v) {
         rebuildLiveInventoryFromSequence(activeSeqId);
         renderActionButtonStates();
         updateUndoButtonState();
+        saveCalculatorFeedForActiveSequence();
     }
 
     if (t === 'listed') {
@@ -3760,6 +4178,7 @@ function addBox(boxCode) {
     if (qtyInput) qtyInput.value = 1;
     renderActionButtonStates();
     updateUndoButtonState();
+saveCalculatorFeedForActiveSequence();
 }
 
 function addVolume(amount) {
@@ -3872,6 +4291,7 @@ function addInventoryItem(itemName) {
     if (qtyInput) qtyInput.value = 1;
     renderActionButtonStates();
     updateUndoButtonState();
+saveCalculatorFeedForActiveSequence();
 }
 function addMiscItem() {
     const overlay = document.getElementById("misc-overlay");
@@ -4004,7 +4424,8 @@ function saveMiscModal() {
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
     updateUndoButtonState();
-    renderActionButtonStates();
+renderActionButtonStates();
+saveCalculatorFeedForActiveSequence();
 
     if (qtyInput) qtyInput.value = 1;
 
@@ -4478,6 +4899,7 @@ function updateLastItemQty(newQty) {
 
     renderActionButtonStates();
     updateUndoButtonState();
+    saveCalculatorFeedForActiveSequence();
 }
 function openVolumeOverride() {
     if (!lastAddedItemName) return;
@@ -4735,6 +5157,7 @@ else if (action.type === "damage-edit") {
 
 renderActionButtonStates();
     updateUndoButtonState();
+    saveCalculatorFeedForActiveSequence();
 }
 function updateInventoryDisplay(logText = "No items added") {
     let log = document.querySelector(".log-bar");
@@ -6191,9 +6614,626 @@ function printListedInventoryPdf() {
         printWindow.print();
     }, 400);
 }
+const BOX_RATES = {
+    ap: 10,
+    cg: 4,
+    books: 15,
+    linen: 10,
+    wr: 8
+};
+
+const SPECIAL_MINUTES = {
+    frame: 30,
+    bunk: 60,
+    upright: 50,
+    grand: 120,
+    clock: 60,
+    appliance: 60,
+    crate: 30
+};
+
+const MORNING_LOAD_RATE = 125;
+const AFTERNOON_LOAD_RATE_AFTER_AM = 55;
+
+const DAY_PARTS = ["Full Day", "AM", "PM"];
+const TASK_OPTIONS = [
+    "Pack",
+    "Load",
+    "Unload",
+    "Pack and Load",
+    "Load and Deliver",
+    "Load and Travel",
+    "Deliver and Crew Return"
+];
+
+let manualSchedule = [
+    { id: createId(), groupId: createId(), dayPart: "Full Day", task: "Pack", men: 2, hours: 8 }
+];
+function getPhotonFeed() {
+    const raw = localStorage.getItem("photon_calculator_feed");
+
+    if (!raw) {
+        return {
+            sequenceLabel: "—",
+            packOption: "none",
+            furnitureVol: 0,
+            qty: {
+                ap: 0,
+                cg: 0,
+                books: 0,
+                linen: 0,
+                wr: 0
+            }
+        };
+    }
+
+    try {
+        const parsed = JSON.parse(raw);
+
+        return {
+            sequenceLabel: parsed.sequenceLabel || "—",
+            packOption: parsed.packOption || "none",
+            furnitureVol: Number(parsed.furnitureVol || 0),
+            qty: {
+                ap: Number(parsed.qty?.ap || 0),
+                cg: Number(parsed.qty?.cg || 0),
+                books: Number(parsed.qty?.books || 0),
+                linen: Number(parsed.qty?.linen || 0),
+                wr: Number(parsed.qty?.wr || 0)
+            }
+        };
+    } catch (err) {
+        return {
+            sequenceLabel: "—",
+            packOption: "none",
+            furnitureVol: 0,
+            qty: {
+                ap: 0,
+                cg: 0,
+                books: 0,
+                linen: 0,
+                wr: 0
+            }
+        };
+    }
+}
+
+function num(id){
+    const el = document.getElementById(id);
+    if (!el) return 0;
+    const value = parseFloat(el.value);
+    return Number.isFinite(value) && value > 0 ? value : 0;
+}
+
+function round2(value){
+    return Math.round((Number(value || 0) + Number.EPSILON) * 100) / 100;
+}
+
+function round1(value){
+    return Math.round((Number(value || 0) + Number.EPSILON) * 10) / 10;
+}
+
+function getPackModeLabel(packOption){
+    if (packOption === "none") return "No";
+    if (packOption === "cg") return "CG";
+    return "Full";
+}
+
+function getIncludedKeys(packOption){
+    if (packOption === "none") return [];
+    if (packOption === "cg") return ["cg"];
+    return ["ap", "cg", "books", "linen", "wr"];
+}
+
+function getState(){
+    const photonFeed = getPhotonFeed();
+    return {
+        packOption: photonFeed.packOption || "none",
+        furnitureVol: photonFeed.furnitureVol || 0,
+        loftVol: num("loftVol"),
+        loadRate: num("loadRate") || 125,
+        unloadRate: num("unloadRate") || 132,
+        transitHours: num("transitHours"),
+        transitMinutes: num("transitMinutes"),
+
+        qty: {
+            ap: photonFeed.qty.ap || 0,
+            cg: photonFeed.qty.cg || 0,
+            books: photonFeed.qty.books || 0,
+            linen: photonFeed.qty.linen || 0,
+            wr: photonFeed.qty.wr || 0
+        },
+
+        boxVolumes: BOX_VOLUMES,
+
+        special: {
+            frame: num("svc_frame"),
+            bunk: num("svc_bunk"),
+            customMinutes: num("svc_custom_minutes"),
+            customNote: document.getElementById("svc_custom_note")
+                ? document.getElementById("svc_custom_note").value.trim()
+                : "",
+            upright: num("svc_upright"),
+            grand: num("svc_grand"),
+            clock: num("svc_clock"),
+            appliance: num("svc_appliance"),
+            crate: num("svc_crate")
+        },
+
+        exportWrapVol: num("exportWrapVol")
+    };
+}
+function calcPacking(state){
+    const includedKeys = getIncludedKeys(state.packOption);
+    const packHours = Object.keys(BOX_RATES).reduce((sum, key) => {
+        const qty = state.qty[key] || 0;
+        if (!includedKeys.includes(key)) return sum;
+        return sum + (qty / BOX_RATES[key]);
+    }, 0);
+    return {
+        packHours: round2(packHours),
+        packDays: round1(packHours / 8)
+    };
+}
+
+function calcBoxVolume(state){
+    return Object.keys(state.qty).reduce((sum, key) => {
+        return sum + ((state.qty[key] || 0) * (state.boxVolumes[key] || 0));
+    }, 0);
+}
+
+function calcSpecialLabour(state){
+    const includedFrameBeds = 2;
+    const includedExportWrapVol = 50;
+
+    const extraFrameBeds = Math.max(0, state.special.frame - includedFrameBeds);
+    const extraExportWrapVol = Math.max(0, state.exportWrapVol - includedExportWrapVol);
+    const transitTotalMinutes = (state.transitHours * 60) + state.transitMinutes;
+    const extraTransitMinutes = Math.max(0, transitTotalMinutes - 30);
+
+    const loadMinutes =
+        (extraFrameBeds * 15) +
+        (state.special.bunk * 30) +
+        (state.special.customMinutes > 0 ? state.special.customMinutes : 0) +
+        (state.special.upright * 25) +
+        (state.special.grand * 60) +
+        (state.special.clock * 30) +
+        (state.special.appliance * 30) +
+        (state.special.crate * 15) +
+        ((state.loftVol / 100) * 20) +
+        ((extraExportWrapVol / 100) * 25);
+
+    const unloadMinutes =
+        (extraFrameBeds * 15) +
+        (state.special.bunk * 30) +
+        (state.special.customMinutes > 0 ? state.special.customMinutes : 0) +
+        (state.special.upright * 25) +
+        (state.special.grand * 60) +
+        (state.special.clock * 30) +
+        (state.special.appliance * 30) +
+        (state.special.crate * 15) +
+        extraTransitMinutes;
+
+    const totalHours = (loadMinutes + unloadMinutes) / 60;
+
+    return {
+        specialHours: round2(totalHours),
+        loadSideHours: round2(loadMinutes / 60),
+        unloadSideHours: round2(unloadMinutes / 60),
+        extraTransitHours: round2(extraTransitMinutes / 60),
+        breakdown: {
+            frame: round2((extraFrameBeds * 30) / 60),
+            bunk: round2((state.special.bunk * 60) / 60),
+            custom: round2(((state.special.customMinutes > 0 ? state.special.customMinutes * 2 : 0)) / 60),
+            upright: round2((state.special.upright * 50) / 60),
+            grand: round2((state.special.grand * 120) / 60),
+            clock: round2((state.special.clock * 60) / 60),
+            appliance: round2((state.special.appliance * 60) / 60),
+            crate: round2((state.special.crate * 30) / 60),
+            loft: round2(((state.loftVol / 100) * 20) / 60),
+            exportWrap: round2(((extraExportWrapVol / 100) * 25) / 60),
+            transit: round2(extraTransitMinutes / 60),
+            includedFrameBeds,
+            includedExportWrapVol
+        }
+    };
+}
+
+function calcLoading(totalVolume, loadRate, loadSideSpecialHours){
+    const volumeHours = totalVolume / loadRate;
+    const totalHours = volumeHours + loadSideSpecialHours;
+    return {
+        hours: round2(totalHours),
+        days: round1(totalHours / 8),
+        completionCrew: round1(totalHours / 4),
+        volumeHours: round2(volumeHours)
+    };
+}
+
+function calcUnloading(totalVolume, unloadRate, unloadSideSpecialHours){
+    const volumeHours = totalVolume / unloadRate;
+    const totalHours = volumeHours + unloadSideSpecialHours;
+    return {
+        hours: round2(totalHours),
+        days: round1(totalHours / 8),
+        completionCrew: round1(totalHours / 4),
+        volumeHours: round2(volumeHours)
+    };
+}
+function optionHtml(options, selected){
+    return options.map(opt => `<option value="${opt}" ${String(opt) === String(selected) ? "selected" : ""}>${opt}</option>`).join("");
+}
+
+function addScheduleDay(){
+    const groupId = createId();
+    manualSchedule.push({ id: createId(), groupId, dayPart: "Full Day", task: "Load", men: 2, hours: 8 });
+    renderScheduleCalculator();
+}
+
+function removeScheduleDay(id){
+    if (manualSchedule.length <= 1) return;
+    const row = manualSchedule.find(day => day.id === id);
+    if (!row) return;
+    manualSchedule = manualSchedule.filter(day => day.groupId !== row.groupId);
+    if (manualSchedule.length === 0){
+        manualSchedule = [{ id: createId(), groupId: createId(), dayPart: "Full Day", task: "Pack", men: 2, hours: 8 }];
+    }
+    renderScheduleCalculator();
+}
+
+function ensurePmPair(row){
+    const pairExists = manualSchedule.some(day => day.groupId === row.groupId && day.dayPart === "PM");
+    if (!pairExists){
+        manualSchedule.push({
+            id: createId(),
+            groupId: row.groupId,
+            dayPart: "PM",
+            task: "Unload",
+            men: row.men,
+            hours: 4
+        });
+    }
+}
+
+function normalizeGroup(groupId){
+    const rows = manualSchedule.filter(day => day.groupId === groupId);
+    const hasAm = rows.some(day => day.dayPart === "AM");
+    const hasPm = rows.some(day => day.dayPart === "PM");
+    const hasFull = rows.some(day => day.dayPart === "Full Day");
+
+    if (hasAm && !hasPm){
+        const amRow = rows.find(day => day.dayPart === "AM");
+        ensurePmPair(amRow);
+    }
+
+    if (hasFull && rows.length > 1){
+        manualSchedule = manualSchedule.filter(day => !(day.groupId === groupId && day.dayPart !== "Full Day"));
+    }
+}
+
+function updateScheduleDay(id, field, value){
+    manualSchedule = manualSchedule.map(day => {
+        if (day.id !== id) return day;
+        if (field === "men" || field === "hours") {
+            return { ...day, [field]: Math.max(0, Number(value) || 0) };
+        }
+        return { ...day, [field]: value };
+    });
+
+    const row = manualSchedule.find(day => day.id === id);
+    if (row && field === "dayPart"){
+        if (value === "AM"){
+            const updated = manualSchedule.find(day => day.id === id);
+            updated.hours = 4;
+            updated.task = "Load";
+            ensurePmPair(updated);
+        }
+        if (value === "PM"){
+            const updated = manualSchedule.find(day => day.id === id);
+            updated.hours = 4;
+            updated.task = "Unload";
+            const hasAm = manualSchedule.some(day => day.groupId === updated.groupId && day.dayPart === "AM");
+            if (!hasAm){
+                manualSchedule.push({
+                    id: createId(),
+                    groupId: updated.groupId,
+                    dayPart: "AM",
+                    task: "Load",
+                    men: updated.men,
+                    hours: 4
+                });
+            }
+        }
+        if (value === "Full Day"){
+            manualSchedule = manualSchedule.filter(day => day.groupId !== row.groupId || day.id === row.id);
+            manualSchedule = manualSchedule.map(day => day.id === row.id ? { ...day, dayPart: "Full Day", hours: 8, task: day.task === "Unload" ? "Load and Deliver" : day.task } : day);
+        }
+        normalizeGroup(row.groupId);
+    }
+
+    renderScheduleCalculator();
+}
+
+function renderSchedulePlanner(){
+    const list = document.getElementById("scheduleList");
+    if (!list) return;
+
+    const groups = [];
+    const seen = new Set();
+    manualSchedule.forEach(day => {
+        if (!seen.has(day.groupId)){
+            seen.add(day.groupId);
+            groups.push(day.groupId);
+        }
+    });
+
+    list.innerHTML = groups.map((groupId, groupIndex) => {
+        const rows = manualSchedule.filter(day => day.groupId === groupId).sort((a,b) => {
+            const order = { "Full Day": 0, "AM": 1, "PM": 2 };
+            return order[a.dayPart] - order[b.dayPart];
+        });
+
+        return rows.map((day, rowIndex) => `
+            <div class="schedule-row">
+                <div class="schedule-row-head">
+                    <div class="schedule-row-title">Day ${groupIndex + 1}${rows.length > 1 ? ` · ${day.dayPart}` : ""}</div>
+                    ${rowIndex === 0 && manualSchedule.length > 1 ? `<button class="schedule-remove" onclick="removeScheduleDay('${day.id}')">Delete</button>` : ""}
+                </div>
+                <div class="schedule-grid">
+                    <div>
+                        <label class="mini-label">Task</label>
+                        <select class="field" onchange="updateScheduleDay('${day.id}','task',this.value)">
+                            ${optionHtml(TASK_OPTIONS, day.task)}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="mini-label">Day Part</label>
+                        <select class="field" onchange="updateScheduleDay('${day.id}','dayPart',this.value)">
+                            ${optionHtml(DAY_PARTS, day.dayPart)}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="mini-label">Men</label>
+                        <select class="field" onchange="updateScheduleDay('${day.id}','men',this.value)">
+                            ${optionHtml([1,2,3,4], day.men)}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="mini-label">Hours</label>
+                        <input type="number" min="0" step="0.5" class="field" value="${day.hours}" oninput="updateScheduleDay('${day.id}','hours',this.value)" />
+                    </div>
+                </div>
+            </div>
+        `).join("");
+    }).join("");
+}
+
+function calcScheduleValidation(packing, loading, unloading, special, state){
+    const effectiveLoadHours = round2(loading.hours);
+    const required = {
+        Pack: packing.packHours,
+        Load: effectiveLoadHours,
+        Unload: unloading.hours
+    };
+
+    const allocated = {
+        Pack: 0,
+        Load: 0,
+        Unload: 0
+    };
+
+    let sharedPackLoadPool = 0;
+    let sharedLoadUnloadPool = 0;
+
+    const groups = {};
+    manualSchedule.forEach(day => {
+        if (!groups[day.groupId]) groups[day.groupId] = [];
+        groups[day.groupId].push(day);
+    });
+
+    Object.values(groups).forEach(rows => {
+        const hasAmLoadish = rows.some(day => day.dayPart === "AM" && ["Load", "Pack and Load", "Load and Deliver", "Load and Travel"].includes(day.task));
+
+        rows.forEach(day => {
+            const men = Number(day.men) || 0;
+            const hours = Number(day.hours) || 0;
+            const capacity = men * hours;
+
+            switch(day.task){
+                case "Pack":
+                    allocated.Pack += capacity;
+                    break;
+                case "Unload":
+                case "Deliver and Crew Return":
+                    allocated.Unload += capacity;
+                    break;
+                case "Pack and Load":
+                    if (day.dayPart === "AM") {
+                        sharedPackLoadPool += capacity;
+                    } else if (day.dayPart === "PM" && hasAmLoadish) {
+                        const pmLoadHours = round2((men * hours * AFTERNOON_LOAD_RATE_AFTER_AM) / state.loadRate);
+                        sharedPackLoadPool += pmLoadHours;
+                    } else {
+                        sharedPackLoadPool += capacity;
+                    }
+                    break;
+                case "Load and Deliver":
+                    if (day.dayPart === "AM") {
+                        sharedLoadUnloadPool += capacity;
+                    } else if (day.dayPart === "PM" && hasAmLoadish) {
+                        const pmLoadHours = round2((men * hours * AFTERNOON_LOAD_RATE_AFTER_AM) / state.loadRate);
+                        sharedLoadUnloadPool += pmLoadHours + Math.max(0, capacity - pmLoadHours);
+                    } else {
+                        sharedLoadUnloadPool += capacity;
+                    }
+                    break;
+                case "Load":
+                case "Load and Travel": {
+                    let loadHoursEquivalent = capacity;
+                    if (day.dayPart === "PM" && hasAmLoadish) {
+                        const pmVolume = men * hours * AFTERNOON_LOAD_RATE_AFTER_AM;
+                        loadHoursEquivalent = round2(pmVolume / state.loadRate);
+                    }
+                    allocated.Load += loadHoursEquivalent;
+                    break;
+                }
+                default:
+                    break;
+            }
+        });
+    });
+
+    const packNeedAfterDirect = Math.max(0, required.Pack - allocated.Pack);
+    const packLoadPoolToPack = Math.min(sharedPackLoadPool, packNeedAfterDirect);
+    allocated.Pack += packLoadPoolToPack;
+    allocated.Load += Math.max(0, sharedPackLoadPool - packLoadPoolToPack);
+
+    const loadNeedAfterPackPool = Math.max(0, required.Load - allocated.Load);
+    const loadUnloadPoolToLoad = Math.min(sharedLoadUnloadPool, loadNeedAfterPackPool);
+    allocated.Load += loadUnloadPoolToLoad;
+    allocated.Unload += Math.max(0, sharedLoadUnloadPool - loadUnloadPoolToLoad);
+
+    const passIcon = "✓";
+    const failIcon = "✕";
+    const warnIcon = "!";
+
+    const results = Object.keys(required).map(task => {
+        const req = required[task] || 0;
+        const cap = allocated[task] || 0;
+        const diff = round2(cap - req);
+
+        if (req === 0 && cap === 0) {
+            return { type: "ok", text: `${passIcon} ${task} not required and none allocated.` };
+        }
+        if (cap + 0.01 < req) {
+            return { type: "error", text: `${failIcon} ${task} short by ${Math.abs(diff).toFixed(2)} man-hours.` };
+        }
+        if (diff > 0.5) {
+            return { type: "warn", text: `${warnIcon} ${task} has ${diff.toFixed(2)} spare man-hours allocated.` };
+        }
+        return { type: "ok", text: `${passIcon} ${task} capacity matches requirement.` };
+    });
+
+    if (sharedPackLoadPool > 0){
+        results.push({ type: "ok", text: `${passIcon} Pack and Load rows use a shared labour pool, so spare pack capacity can offset load demand.` });
+    }
+    if (sharedLoadUnloadPool > 0){
+        results.push({ type: "ok", text: `${passIcon} Load and Deliver rows use a shared labour pool, so spare load capacity can offset unload demand.` });
+    }
+    results.push({
+        type: special.extraTransitHours > 0 ? "warn" : "ok",
+        text: special.extraTransitHours > 0
+            ? `${warnIcon} Transit beyond the first 30 minutes adds ${special.extraTransitHours.toFixed(2)} hours to the unload side and may reduce delivery-side feasibility.`
+            : `${passIcon} Transit is within the first 30 minutes included allowance.`
+    });
+    results.push({
+        type: "ok",
+        text: `${passIcon} Planner load validation uses ${MORNING_LOAD_RATE} cuft per man-hour in the morning and ${AFTERNOON_LOAD_RATE_AFTER_AM} cuft per man-hour for PM loading when it follows AM loading on the same day.`
+    });
+    results.push({
+        type: "ok",
+        text: `${passIcon} Load-side specials are included in loading, and unload-side specials are included in unloading for schedule checking.`
+    });
+
+    return results;
+}
+
+function renderValidation(packing, loading, unloading, special, state){
+    const el = document.getElementById("validationList");
+    if (!el) return;
+    const items = calcScheduleValidation(packing, loading, unloading, special, state);
+    el.innerHTML = items.map(item => `<div class="validation-item validation-${item.type}">${item.text}</div>`).join("");
+}
+
+function renderScheduleCalculator(){
+    const photonFeed = getPhotonFeed();
+    const state = getState();
+
+    const sequenceLabelDisplay = document.getElementById("sequenceLabelDisplay");
+    if (sequenceLabelDisplay) sequenceLabelDisplay.textContent = photonFeed.sequenceLabel || "—";
+
+    const packing = calcPacking(state);
+    const boxVolume = round2(calcBoxVolume(state));
+    const totalVolume = round2(state.furnitureVol + boxVolume);
+
+    const furnitureDisplay = document.getElementById("furnitureVolDisplay");
+    if (furnitureDisplay) furnitureDisplay.textContent = state.furnitureVol;
+
+    const apDisplay = document.getElementById("qty_ap_display");
+    if (apDisplay) apDisplay.textContent = state.qty.ap;
+
+    const cgDisplay = document.getElementById("qty_cg_display");
+    if (cgDisplay) cgDisplay.textContent = state.qty.cg;
+
+    const booksDisplay = document.getElementById("qty_books_display");
+    if (booksDisplay) booksDisplay.textContent = state.qty.books;
+
+    const linenDisplay = document.getElementById("qty_linen_display");
+    if (linenDisplay) linenDisplay.textContent = state.qty.linen;
+
+    const wrDisplay = document.getElementById("qty_wr_display");
+    if (wrDisplay) wrDisplay.textContent = state.qty.wr;
+
+    const special = calcSpecialLabour(state);
+    const loading = calcLoading(totalVolume, state.loadRate, special.loadSideHours);
+    const unloading = calcUnloading(totalVolume, state.unloadRate, special.unloadSideHours);
+
+    document.getElementById("summaryMode").textContent = getPackModeLabel(state.packOption);
+    document.getElementById("summaryTotalVolume").textContent = totalVolume;
+    document.getElementById("summaryPackHours").textContent = packing.packHours.toFixed(2);
+    document.getElementById("summaryPackDays").textContent = packing.packDays.toFixed(1);
+    document.getElementById("summarySpecialHours").textContent = special.specialHours.toFixed(2);
+    document.getElementById("summaryLoadHours").textContent = loading.hours.toFixed(2);
+    document.getElementById("summaryLoadDays").textContent = loading.days.toFixed(1);
+    document.getElementById("summaryLoadCompletion").textContent = loading.completionCrew.toFixed(1);
+    document.getElementById("summaryLoadRate").textContent = state.loadRate;
+
+    document.getElementById("summaryUnloadHours").textContent = unloading.hours.toFixed(2);
+    document.getElementById("summaryUnloadDays").textContent = unloading.days.toFixed(1);
+    document.getElementById("summaryUnloadCompletion").textContent = unloading.completionCrew.toFixed(1);
+    document.getElementById("summaryUnloadRate").textContent = state.unloadRate;
+
+    const packingRule = state.packOption === "none"
+        ? "No packing selected, so packing labour is held at zero."
+        : state.packOption === "cg"
+            ? "CG packing selected, so only CG cartons contribute to packing labour."
+            : "Full packing selected, so all carton types contribute to packing labour.";
+
+    document.getElementById("logicText").textContent =
+        `${packingRule} Total volume is furniture volume plus calculated box volume. ` +
+        `Loft effects volume is used for extra loft labour only and does not change total move volume. ` +
+        `Loading uses total volume ÷ ${state.loadRate} cuft per man-hour, then adds load-side specials. ` +
+        `Unloading uses total volume ÷ ${state.unloadRate} cuft per man-hour, then adds unload-side specials. ` +
+        `Two regular frame beds and 50 cuft of export wrap are treated as already included before extra special time is added.`;
+
+    document.getElementById("specialText").textContent =
+        `Frame beds: ${special.breakdown.frame.toFixed(2)} hrs extra after first ${special.breakdown.includedFrameBeds} included · ` +
+        `Bunk beds: ${special.breakdown.bunk.toFixed(2)} hrs · ` +
+        `${state.special.customNote ? state.special.customNote : "Custom item"}: ${special.breakdown.custom.toFixed(2)} hrs · ` +
+        `Upright pianos: ${special.breakdown.upright.toFixed(2)} hrs · ` +
+        `Baby / grand pianos: ${special.breakdown.grand.toFixed(2)} hrs · ` +
+        `Grandfather clocks: ${special.breakdown.clock.toFixed(2)} hrs · ` +
+        `Appliances: ${special.breakdown.appliance.toFixed(2)} hrs · ` +
+        `Crating: ${special.breakdown.crate.toFixed(2)} hrs · ` +
+        `Loft effects: ${special.breakdown.loft.toFixed(2)} hrs · ` +
+        `Export wrapping: ${special.breakdown.exportWrap.toFixed(2)} hrs extra after first ${special.breakdown.includedExportWrapVol} cuft included · ` +
+        `Transit impact: ${special.breakdown.transit.toFixed(2)} hrs after first 30 mins included. ` +
+        `Load side specials: ${special.loadSideHours.toFixed(2)} hrs · Unload side specials: ${special.unloadSideHours.toFixed(2)} hrs.`;
+
+    renderSchedulePlanner();
+    renderValidation(packing, loading, unloading, special, state);
+}
+
+renderScheduleCalculator();
+</script>
+</body>
+</html>
 window.onload = function () {
+    ensureScheduleDataShape();
+    saveToDevice();
     renderDashboard();
-};    </script>
+};  
+</script>
 <!-- DAMAGE MODAL -->
 <div id="damage-overlay" class="damage-overlay" onclick="closeDamageModal()">
     <div class="damage-panel" onclick="event.stopPropagation()">
