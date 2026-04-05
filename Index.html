@@ -264,8 +264,45 @@ button {
         .input-field:disabled { background-color: #f8fafc; color: #64748b; border-color: #e2e8f0; cursor: not-allowed; opacity: 0.7; }
         
         .action-btn { font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 0 15px; border-radius: 10px; transition: 0.2s; height: 56px; white-space: nowrap; }
-        .btn-save { background: #22c55e; color: white; }
-        .btn-change { background: white; color: #22c55e; border: 2px solid #22c55e; }
+        .btn-save {
+    background: #ffffff;
+    color: #16a34a;
+    border: 2px solid #16a34a;
+}
+
+.btn-change {
+    background: #ffffff;
+    color: #dc2626;
+    border: 2px solid #dc2626;
+}
+       .action-btn.lock-btn {
+    min-width: 118px;
+    height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    border-radius: 10px;
+    background: #ffffff;
+    white-space: nowrap;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.lock-btn-icon {
+    width: 16px;
+    height: 16px;
+    display: block;
+    flex-shrink: 0;
+}
+
+.lock-btn-text {
+    display: inline-block;
+    line-height: 1;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
 
         /* --- DASHBOARD --- */
         .job-card { background: white; border-radius: 16px; padding: 20px; border-left: 8px solid #cbd5e1; cursor: pointer; transition: transform 0.1s; position: relative; }
@@ -359,9 +396,42 @@ button {
     background: #fff;
     line-height: 1.4;
 }
+
 .property-label-input {
     font-size: 14px;
     line-height: 1.4;
+    font-weight: 600;
+}
+
+.address-top-selector {
+    font-weight: 600;
+}
+
+.address-property-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.address-property-field {
+    flex: 1;
+}
+
+.address-property-delete {
+    background: #dc2626;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
 }
         
         #manual-entry-area { display: none; background: white; border: 3px solid #3b82f6; border-radius: 20px; padding: 20px; margin-bottom: 24px; }
@@ -492,7 +562,8 @@ button {
     line-height: 1.35;
 }
         .vol-box {
-    border: 2.5px solid #fca5a5;
+    background: #ffffff;
+    border: 2.5px solid #dc2626;
     border-radius: 8px;
     height: 50px;
     display: flex;
@@ -512,6 +583,9 @@ button {
     align-items: center;
     justify-content: center;
     padding: 6px 6px 4px;
+}
+.inventory-stat-col {
+    margin-top: 14px;
 }
 
 .inventory-stat-mini {
@@ -591,12 +665,18 @@ button {
     -moz-appearance: textfield;
 }
 
-        /* Keep undo light red even though it also has total-vol-box */
-        #undo-btn {
-            background: #fee2e2 !important;
-            color: #dc2626 !important;
-            border: 1px solid #fca5a5 !important;
-        }
+        .undo-btn-style {
+    height: 50px;
+    border-radius: 8px;
+    border: 2.5px solid #dc2626;
+    background: #dc2626;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 /* --- CRATE MODAL --- */
 .crate-overlay {
     display: none;
@@ -1420,6 +1500,11 @@ button {
     background: #ffffff;
 }
 
+.signature-pad.locked {
+    pointer-events: none;
+    background: #f8fafc;
+    cursor: default;
+}
 .signature-meta {
     margin-top: 8px;
     font-size: 9px;
@@ -1427,7 +1512,113 @@ button {
     text-transform: uppercase;
     color: #64748b;
 }
+.signature-status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
 
+.signature-lock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+.signature-lock-icon {
+    width: 10px;
+    height: 10px;
+    display: block;
+    flex-shrink: 0;
+}
+/* --- INVENTORY SEARCH + SCROLL --- */
+.inventory-search-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.inventory-search-input {
+    flex: 1;
+    height: 44px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    outline: none;
+    background: #ffffff;
+    color: #0f172a;
+    font-family: 'Inter', sans-serif;
+}
+
+.inventory-search-input:focus {
+    border-color: #3b82f6;
+}
+
+.inventory-search-clear {
+    min-width: 76px;
+    height: 44px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #475569;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+.inventory-search-count {
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 10px;
+    padding-left: 2px;
+}
+
+.inventory-picker-shell {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 8px;
+}
+
+.inventory-picker-scroll {
+    max-height: 52vh;
+    min-height: 260px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
+}
+
+.inventory-picker-scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.inventory-picker-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 999px;
+}
+
+.inventory-side-column {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    background: #ffffff;
+}
+</style>
     </style>
 </head>
 <body class="p-4 pb-12">
@@ -1508,8 +1699,8 @@ Enter as: Surname, First Name
 
         <section id="content-address" class="tab-content tab-content-wrapper bg-white p-5 rounded-2xl shadow-inner">
             <div class="flex gap-2 mb-6 items-center justify-between">
-                <select id="prop-selector" onchange="loadProperty(this.value)" class="input-field border-2 border-blue-500 bg-blue-50 flex-grow h-14 text-blue-900 font-bold transition-all"></select>
-                <button id="btn-save-address" onclick="toggleSaveState('address')" class="action-btn btn-save">Save</button>
+                <select id="prop-selector" onchange="loadProperty(this.value)" class="input-field address-top-selector border-2 border-blue-500 bg-blue-50 flex-grow h-14 text-blue-900 transition-all"></select>
+                <button id="btn-save-address" onclick="toggleSaveState('address')" class="action-btn lock-btn btn-save">Lock</button>
                 <button onclick="addProperty()" class="add-property-btn shadow-md">
                     <span class="btn-plus-icon">+</span>
                     <span class="btn-text-block">
@@ -1526,7 +1717,7 @@ Enter as: Surname, First Name
                 <div class="flex-grow min-w-[150px]">
                     <select id="seq-switcher" onchange="loadSequence(this.value)" class="w-full bg-slate-800 text-white border-none rounded-lg h-12 px-3 font-black text-xs outline-none"></select>
                 </div>
-                <button id="btn-save-sequence" onclick="toggleSaveState('sequence')" class="action-btn !h-12 !px-6 btn-save">Save</button>
+                <button id="btn-save-sequence" onclick="toggleSaveState('sequence')" class="action-btn lock-btn btn-save">Lock</button>
                 <button onclick="addSequence()" class="action-btn !h-12 !px-6 bg-blue-600 text-white">New Sequence</button>
                 <button id="btn-copy-seq" onclick="copySequence()" class="action-btn !h-12 !px-6 bg-slate-700 text-white">Copy Current</button>
                 <button id="btn-del-seq" onclick="deleteSequence()" class="action-btn !h-12 !px-6 bg-red-900 text-red-200">Delete</button>
@@ -1552,7 +1743,7 @@ Enter as: Surname, First Name
         <label class="mini-label">Room</label>
         <select id="inv-room-select" onchange="handleRoomChange(this.value)" class="inv-header-select inv-top-field"></select>
     </div>
-<div class="col-span-1">
+<div class="col-span-1 inventory-stat-col">
     <div class="inventory-stat-box">
         <div class="inventory-stat-mini">Item Qty</div>
         <input
@@ -1568,7 +1759,7 @@ Enter as: Surname, First Name
         >
     </div>
 </div>
-    <div class="col-span-1">
+<div class="col-span-1 inventory-stat-col">
     <div class="inventory-stat-box">
         <div class="inventory-stat-mini">Total Vol</div>
         <div id="inv-total-volume" class="inventory-stat-value">0</div>
@@ -1602,7 +1793,7 @@ Enter as: Surname, First Name
     class="w-20 vol-box"
     onclick="openVolumeOverride()"
 >
-    <span class="mini-label !mb-0 text-red-400">Vol</span>
+    <span class="mini-label !mb-0 text-red-600">Vol</span>
     <span class="text-sm font-black">50</span>
 </div>
                <button
@@ -1614,28 +1805,51 @@ Enter as: Surname, First Name
 </button>
             </div>
 
+                       <div class="inventory-search-row mb-3">
+                <input
+                    type="text"
+                    id="inventory-search-input"
+                    class="inventory-search-input"
+                    placeholder="Search inventory items..."
+                    oninput="handleInventorySearch(this.value)"
+                >
+                <button
+                    type="button"
+                    class="inventory-search-clear"
+                    onclick="clearInventorySearch()"
+                >
+                    Clear
+                </button>
+            </div>
+
+            <div id="inventory-search-count" class="inventory-search-count">Showing all items</div>
+
             <div class="grid grid-cols-5 gap-1">
-    <div id="inventory-button-grid" class="col-span-4 grid grid-cols-4 gap-1"></div>
+    <div class="col-span-4 inventory-picker-shell">
+        <div id="inventory-picker-scroll" class="inventory-picker-scroll">
+            <div id="inventory-button-grid" class="grid grid-cols-4 gap-1"></div>
+        </div>
+    </div>
 
-  <div class="col-span-1 grid grid-cols-1 gap-1">
-    <button class="item-btn bg-red-50 text-red-500 border-red-100 flex-col">
-        VOICE
-        <span class="text-[7px] opacity-60">0 CLIPS</span>
-    </button>
+    <div class="col-span-1 grid grid-cols-1 gap-1 inventory-side-column">
+        <button class="item-btn bg-red-50 text-red-500 border-red-100 flex-col">
+            VOICE
+            <span class="text-[7px] opacity-60">0 CLIPS</span>
+        </button>
 
-    <button class="item-btn item-btn-blue" onclick="addBox('AP')">AP</button>
-    <button class="item-btn item-btn-blue" onclick="addBox('CG')">CG</button>
-    <button class="item-btn item-btn-blue" onclick="addBox('BOOK')">BOOK</button>
-    <button class="item-btn item-btn-blue" onclick="addBox('LINEN')">LINEN</button>
-    <button class="item-btn item-btn-blue" onclick="addBox('WR')">WR</button>
+        <button class="item-btn item-btn-blue" onclick="addBox('AP')">AP</button>
+        <button class="item-btn item-btn-blue" onclick="addBox('CG')">CG</button>
+        <button class="item-btn item-btn-blue" onclick="addBox('BOOK')">BOOK</button>
+        <button class="item-btn item-btn-blue" onclick="addBox('LINEN')">LINEN</button>
+        <button class="item-btn item-btn-blue" onclick="addBox('WR')">WR</button>
 
-    <button class="item-btn item-btn-blue" onclick="addVolume(1)">1 CUFT</button>
-    <button class="item-btn item-btn-blue" onclick="addVolume(5)">5 CUFT</button>
-    <button class="item-btn item-btn-blue" onclick="addVolume(10)">10 CUFT</button>
-    <button class="item-btn item-btn-blue" onclick="addVolume(20)">20 CUFT</button>
-    <button class="item-btn item-btn-blue" onclick="addVolume(50)">50 CUFT</button>
-    <button class="item-btn item-btn-blue" onclick="addVolume(100)">100 CUFT</button>
-</div>
+        <button class="item-btn item-btn-blue" onclick="addVolume(1)">1 CUFT</button>
+        <button class="item-btn item-btn-blue" onclick="addVolume(5)">5 CUFT</button>
+        <button class="item-btn item-btn-blue" onclick="addVolume(10)">10 CUFT</button>
+        <button class="item-btn item-btn-blue" onclick="addVolume(20)">20 CUFT</button>
+        <button class="item-btn item-btn-blue" onclick="addVolume(50)">50 CUFT</button>
+        <button class="item-btn item-btn-blue" onclick="addVolume(100)">100 CUFT</button>
+    </div>
 </div>
         </section>
         
@@ -2043,6 +2257,7 @@ let inventoryItems = [];
 let currentItemVolume = 0;
 let totalVolume = 0;
 let currentInventoryCategory = "Full List";
+let inventorySearchText = "";
 let lastAddedItemName = null;
 let lastAddedRawEntryId = null;
 let inventoryHistory = [];
@@ -2059,6 +2274,8 @@ let signaturePadCtx = null;
 let signatureDrawing = false;
 let signatureLastX = 0;
 let signatureLastY = 0;
+let signatureLocked = false;
+let inventoryReturnContext = null;
 function getDefaultSequenceId() {
     if (!currentJob || !Array.isArray(currentJob.sequences) || currentJob.sequences.length === 0) {
         return null;
@@ -2073,11 +2290,42 @@ function setActiveSequenceToDefault() {
     activeSeqId = defaultSeqId;
     return activeSeqId;
 }
+function saveInventoryContext() {
+    if (!currentJob) return;
+    if (!currentJob.inventory) currentJob.inventory = {};
 
+    currentJob.inventory.activeSequenceId = activeSeqId || null;
+
+    inventoryReturnContext = {
+        sequenceId: currentJob.inventory.activeSequenceId || null,
+        deliveryId: currentJob.inventory.activeDeliveryId || null,
+        floorName: currentJob.inventory.activeFloor || "Ground",
+        roomName: currentJob.inventory.activeRoomName || "Hallway"
+    };
+}
         function saveToDevice() {
             localStorage.setItem('photon_jobs', JSON.stringify(jobs));
         }
 
+function getLockButtonContent(isLocked) {
+    const iconColor = isLocked ? "#dc2626" : "#22c55e";
+    const label = isLocked ? "Unlock" : "Lock";
+
+    const shacklePath = isLocked
+        ? `<path d="M8.5 11V8.8a3.5 3.5 0 0 1 6 0" fill="none" stroke="${iconColor}" stroke-width="1.8" stroke-linecap="round"/>`
+        : `<path d="M8.5 11V8.8a3.5 3.5 0 1 1 7 0V11" fill="none" stroke="${iconColor}" stroke-width="1.8" stroke-linecap="round"/>`;
+
+    return `
+        <svg viewBox="0 0 24 24" class="lock-btn-icon" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" fill="none" stroke="${iconColor}" stroke-width="1.8"/>
+            ${shacklePath}
+            <rect x="7" y="10.5" width="10" height="8" rx="2" fill="${iconColor}"/>
+            <circle cx="12" cy="14" r="1.1" fill="#ffffff"/>
+            <path d="M12 15.2v1.4" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <span class="lock-btn-text">${label}</span>
+    `;
+}
         function toTitleCase(str) { return str.replace(/\w\S*/g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()); }
         function createDefaultProperties() {
             const now = Date.now();
@@ -2172,6 +2420,8 @@ if (!Array.isArray(currentJob.inventory.items)) currentJob.inventory.items = [];
 currentItemVolume = 0;
 totalVolume = 0;
 currentInventoryCategory = "Full List";
+inventorySearchText = "";
+inventoryReturnContext = null;
 lastAddedItemName = null;
 lastAddedRawEntryId = null;
 inventoryItems = [];
@@ -2195,16 +2445,25 @@ const isCollectionAddress = prop.id === currentJob.properties[0].id;
             isSaved ? wrapper.classList.add('is-saved') : wrapper.classList.remove('is-saved');
 
             const saveBtn = document.getElementById('btn-save-address');
-            saveBtn.innerText = isSaved ? 'Change' : 'Save';
-            saveBtn.className = `action-btn ${isSaved ? 'btn-change' : 'btn-save'}`;
-
+saveBtn.innerHTML = getLockButtonContent(isSaved);
+saveBtn.className = `action-btn lock-btn ${isSaved ? 'btn-change' : 'btn-save'}`;
+saveBtn.setAttribute('aria-label', isSaved ? 'Unlock address' : 'Lock address');
             document.getElementById('prop-selector').innerHTML = currentJob.properties.map(p => `<option value="${p.id}" ${p.id === activePropId ? 'selected' : ''}>${toTitleCase(p.label)}</option>`).join('');
             
            document.getElementById('address-editor-ui').innerHTML = `
-    <div class="bg-slate-50 p-4 rounded-xl border border-blue-100 flex justify-between items-center">
-        <div class="flex-grow"><label class="mini-label text-blue-600">Property Label</label><input type="text" ${status} oninput="updatePropLabel(this.value)" class="w-full bg-transparent font-bold outline-none text-blue-900 property-label-input" value="${toTitleCase(prop.label)}"></div>
-        ${(!prop.isCore && !isSaved) ? `<button onclick="deleteProperty(${prop.id})" class="text-red-600 text-[9px] font-black uppercase">Delete Address</button>` : ''}
+    <div class="address-property-row">
+    <div class="address-property-field">
+        <label class="mini-label">Property Label</label>
+        <input
+            type="text"
+            ${status}
+            oninput="updatePropLabel(this.value)"
+            class="input-field property-label-input"
+            value="${toTitleCase(prop.label)}"
+        >
     </div>
+    ${(!prop.isCore && !isSaved) ? `<button onclick="deleteProperty(${prop.id})" class="address-property-delete">Delete Address</button>` : ''}
+</div>
 
     ${isCollectionAddress ? `
     <div class="bg-white border border-slate-200 rounded-xl p-4">
@@ -2341,7 +2600,10 @@ function handleInventoryDeliveryChange(value) {
     if (!currentJob) return;
     if (!currentJob.inventory) currentJob.inventory = {};
 
+    currentJob.inventory.activeSequenceId = activeSeqId || null;
     currentJob.inventory.activeDeliveryId = value;
+
+    saveInventoryContext();
     saveToDevice();
 }
        function ensureInventoryStore() {
@@ -2625,10 +2887,13 @@ function handleRoomChange(value) {
         return;
     }
 
+        currentJob.inventory.activeSequenceId = activeSeqId || null;
     currentJob.inventory.activeRoomName = value;
     resetInventoryQtyInput();
     lastAddedItemName = null;
     lastAddedRawEntryId = null;
+
+    saveInventoryContext();
     saveToDevice();
 }
         function getFloorOptions() {
@@ -2725,16 +2990,44 @@ function handleFloorChange(value) {
         return;
     }
 
+       currentJob.inventory.activeSequenceId = activeSeqId || null;
     currentJob.inventory.activeFloor = value;
+
+    saveInventoryContext();
     saveToDevice();
 }
     function renderInventoryButtons() {
     const grid = document.getElementById('inventory-button-grid');
+    const countEl = document.getElementById('inventory-search-count');
     if (!grid) return;
 
     const itemsToShow = inventoryCategories[currentInventoryCategory] || [];
+    const search = (inventorySearchText || "").trim().toLowerCase();
 
-    grid.innerHTML = itemsToShow.map(itemName => {
+    const filteredItems = !search
+        ? itemsToShow
+        : itemsToShow.filter(function(itemName) {
+            return itemName.toLowerCase().includes(search);
+        });
+
+    if (countEl) {
+        if (!search) {
+            countEl.innerText = `Showing all items (${itemsToShow.length})`;
+        } else {
+            countEl.innerText = `Showing ${filteredItems.length} of ${itemsToShow.length} items`;
+        }
+    }
+
+    if (!filteredItems.length) {
+        grid.innerHTML = `
+            <div class="col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-4 text-center text-[10px] font-black uppercase text-slate-400">
+                No matching items
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = filteredItems.map(function(itemName) {
         return `<button class="item-btn" onclick="addInventoryItem('${itemName.replace(/'/g, "\\'")}')">${itemName}</button>`;
     }).join('');
 }
@@ -2748,6 +3041,19 @@ function setInventoryCategory(category, btn) {
     renderInventoryButtons();
 }
 
+function handleInventorySearch(value) {
+    inventorySearchText = value || "";
+    renderInventoryButtons();
+}
+
+function clearInventorySearch() {
+    inventorySearchText = "";
+
+    const input = document.getElementById("inventory-search-input");
+    if (input) input.value = "";
+
+    renderInventoryButtons();
+}
 function openSimpleInputModal(config) {
     const overlay = document.getElementById("simple-input-overlay");
     const title = document.getElementById("simple-input-title");
@@ -3030,8 +3336,9 @@ function saveSimpleInputModal() {
             isSaved ? wrapper.classList.add('is-saved') : wrapper.classList.remove('is-saved');
 
             const saveBtn = document.getElementById('btn-save-sequence');
-            saveBtn.innerText = isSaved ? 'Change' : 'Save';
-            saveBtn.className = `action-btn !h-12 !px-6 ${isSaved ? 'btn-change' : 'btn-save'}`;
+saveBtn.innerHTML = getLockButtonContent(isSaved);
+saveBtn.className = `action-btn lock-btn !h-12 !px-6 ${isSaved ? 'btn-change' : 'btn-save'}`;
+saveBtn.setAttribute('aria-label', isSaved ? 'Unlock sequence' : 'Lock sequence');
 
             const selectedSeqId = activeSeqId || getDefaultSequenceId();
 
@@ -3212,6 +3519,7 @@ function updatePropData(f, v) {
     activeSeqId = id;
 
     if (!currentJob.inventory) currentJob.inventory = {};
+    currentJob.inventory.activeSequenceId = id;
     currentJob.inventory.activeDeliveryId = null;
 
     const qtyInput = document.getElementById("inv-qty");
@@ -3221,6 +3529,7 @@ function updatePropData(f, v) {
     renderInventorySequenceDropdown();
     renderInventoryDeliveryDropdown();
 
+    saveInventoryContext();
     rebuildLiveInventoryFromSequence(activeSeqId);
     saveToDevice();
 }
@@ -3232,37 +3541,68 @@ function updatePropData(f, v) {
     document.getElementById('content-' + t).classList.remove('hidden');
     document.getElementById('nav-' + t).classList.add('active');
 
- if (t === 'sequence') {
-    setActiveSequenceToDefault();
+    if (t === 'sequence') {
+    if (!activeSeqId && currentJob && currentJob.inventory && currentJob.inventory.activeSequenceId) {
+        activeSeqId = currentJob.inventory.activeSequenceId;
+    }
+    if (!activeSeqId) {
+        setActiveSequenceToDefault();
+    }
     renderSequenceUI();
 }
-    if (t === 'address') renderAddressUI();
 
-  if (t === 'inventory') {
-    setActiveSequenceToDefault();
+    if (t === 'address') {
+        renderAddressUI();
+    }
 
-    if (!currentJob.inventory) currentJob.inventory = {};
-    currentJob.inventory.activeDeliveryId = null;
+    if (t === 'inventory') {
+        if (!currentJob.inventory) currentJob.inventory = {};
 
-    renderInventorySequenceDropdown();
-    renderInventoryDeliveryDropdown();
-    renderInventoryRoomDropdown();
-    renderInventoryFloorDropdown();
-    renderInventoryButtons();
-    rebuildLiveInventoryFromSequence(activeSeqId);
-    renderActionButtonStates();
-    updateUndoButtonState();
-}
+        const savedSequenceId = currentJob.inventory.activeSequenceId;
+        const savedSequenceExists = savedSequenceId && currentJob.sequences.some(function(seq) {
+            return String(seq.id) === String(savedSequenceId);
+        });
 
-if (t === 'listed') {
-    const defaultSeqId = setActiveSequenceToDefault();
-    listedSequenceFilter = defaultSeqId ? String(defaultSeqId) : "__all__";
+        const hasReturnContext = (
+            inventoryReturnContext &&
+            inventoryReturnContext.sequenceId &&
+            currentJob.sequences.some(function(seq) {
+                return String(seq.id) === String(inventoryReturnContext.sequenceId);
+            })
+        );
 
-    listedDeliveryFilter = "__all__";
-    listedTextFilter = "";
+        if (hasReturnContext) {
+            activeSeqId = inventoryReturnContext.sequenceId;
+            currentJob.inventory.activeSequenceId = inventoryReturnContext.sequenceId;
+            currentJob.inventory.activeDeliveryId = inventoryReturnContext.deliveryId || null;
+            currentJob.inventory.activeFloor = inventoryReturnContext.floorName || "Ground";
+            currentJob.inventory.activeRoomName = inventoryReturnContext.roomName || "Hallway";
+        } else if (savedSequenceExists) {
+            activeSeqId = savedSequenceId;
+        } else {
+            setActiveSequenceToDefault();
+            currentJob.inventory.activeSequenceId = activeSeqId;
+        }
 
-    renderListedInventory();
-}
+        renderInventorySequenceDropdown();
+        renderInventoryDeliveryDropdown();
+        renderInventoryRoomDropdown();
+        renderInventoryFloorDropdown();
+        renderInventoryButtons();
+        rebuildLiveInventoryFromSequence(activeSeqId);
+        renderActionButtonStates();
+        updateUndoButtonState();
+    }
+
+    if (t === 'listed') {
+        saveInventoryContext();
+
+        const defaultSeqId = setActiveSequenceToDefault();
+        listedSequenceFilter = defaultSeqId ? String(defaultSeqId) : "__all__";
+        listedDeliveryFilter = "__all__";
+        listedTextFilter = "";
+        renderListedInventory();
+    }
 }
 
 function splitManualName(fullName) {
@@ -3811,20 +4151,7 @@ function saveCrateModal() {
         unit: selectedCrateUnit
     };
 
-    inventoryHistory.push({
-        type: "crate-edit",
-        rawEntryId: rawEntry.id,
-        previousCrated: previousCrated,
-        previousDims: previousDims,
-        newDims: {
-            l: l,
-            w: w,
-            h: h,
-            unit: selectedCrateUnit
-        }
-    });
-
-    saveToDevice();
+        saveToDevice();
     renderActionButtonStates();
 
     const tags = [];
@@ -3875,15 +4202,23 @@ function saveNoteModal() {
 
     setModalErrorText("note-error-text", "");
 
-    const previousNote = rawEntry.note || "";
+        const previousNote = rawEntry.note || "";
     rawEntry.note = cleanNote;
 
-    inventoryHistory.push({
-        type: "note-edit",
-        rawEntryId: rawEntry.id,
-        previousNote: previousNote,
-        newNote: cleanNote
-    });
+    const lastHistoryAction = inventoryHistory[inventoryHistory.length - 1];
+    const shouldMergeIntoItemUndo =
+        lastHistoryAction &&
+        lastHistoryAction.rawEntryId === rawEntry.id &&
+        (lastHistoryAction.type === "item" || lastHistoryAction.type === "volume");
+
+    if (!shouldMergeIntoItemUndo) {
+        inventoryHistory.push({
+            type: "note-edit",
+            rawEntryId: rawEntry.id,
+            previousNote: previousNote,
+            newNote: cleanNote
+        });
+    }
 
     saveToDevice();
     renderActionButtonStates();
@@ -4022,15 +4357,23 @@ function saveDamageModal() {
 
     setModalErrorText("damage-error-text", "");
 
-    const previousDamage = rawEntry.damage || "";
+        const previousDamage = rawEntry.damage || "";
     rawEntry.damage = finalDamage;
 
-    inventoryHistory.push({
-        type: "damage-edit",
-        rawEntryId: rawEntry.id,
-        previousDamage: previousDamage,
-        newDamage: finalDamage
-    });
+    const lastHistoryAction = inventoryHistory[inventoryHistory.length - 1];
+    const shouldMergeIntoItemUndo =
+        lastHistoryAction &&
+        lastHistoryAction.rawEntryId === rawEntry.id &&
+        (lastHistoryAction.type === "item" || lastHistoryAction.type === "volume");
+
+    if (!shouldMergeIntoItemUndo) {
+        inventoryHistory.push({
+            type: "damage-edit",
+            rawEntryId: rawEntry.id,
+            previousDamage: previousDamage,
+            newDamage: finalDamage
+        });
+    }
 
     saveToDevice();
     renderActionButtonStates();
@@ -4362,32 +4705,7 @@ recalculateTotalVolume();
         updateInventoryDisplay(tags.length ? (label + " " + tags.join(" ")) : label);
     }
 }
-else if (action.type === "crate-edit") {
-    const rawEntry = findRawInventoryEntry(action.rawEntryId);
-    if (rawEntry) {
-        rawEntry.crated = !!action.previousCrated;
-        rawEntry.crateDims = action.previousDims ? {
-            l: action.previousDims.l,
-            w: action.previousDims.w,
-            h: action.previousDims.h,
-            unit: action.previousDims.unit
-        } : null;
 
-        saveToDevice();
-
-        const tags = [];
-        if (rawEntry.dismantle) tags.push("[DISMANTLE]");
-        if (rawEntry.expWrap) tags.push("[EXP WRAP]");
-        if (rawEntry.excluded) tags.push("[EXCLUDED]");
-        if (rawEntry.crated && rawEntry.crateDims) {
-            tags.push("[CRATE: " + rawEntry.crateDims.l + " x " + rawEntry.crateDims.w + " x " + rawEntry.crateDims.h + " " + rawEntry.crateDims.unit + "]");
-        }
-        if (rawEntry.note) tags.push("[NOTE: " + rawEntry.note.toUpperCase() + "]");
-
-        const label = (rawEntry.itemName || "ITEM").toUpperCase();
-        updateInventoryDisplay(tags.length ? (label + " " + tags.join(" ")) : label);
-    }
-}
 else if (action.type === "damage-edit") {
     const rawEntry = findRawInventoryEntry(action.rawEntryId);
     if (rawEntry) {
@@ -4615,6 +4933,16 @@ function escapeHtml(value) {
         .replace(/'/g, "&#39;");
 }
 
+function setInventoryReturnContextFromEntry(entry) {
+    if (!entry) return;
+
+    inventoryReturnContext = {
+        sequenceId: entry.sequenceId || null,
+        deliveryId: entry.deliveryId || null,
+        floorName: entry.floorName || "Ground",
+        roomName: entry.roomName || "Hallway"
+    };
+}
 function getRawEntriesForListedEntry(entry) {
     if (!currentJob || !currentJob.inventory || !Array.isArray(currentJob.inventory.items)) {
         return [];
@@ -4663,6 +4991,8 @@ function deleteListedEntry(entryKey) {
     const mergedEntry = window.__listedEntryMap && window.__listedEntryMap[entryKey];
     if (!mergedEntry) return;
 
+    setInventoryReturnContextFromEntry(mergedEntry);
+
     const rawMatches = getRawEntriesForListedEntry(mergedEntry);
     if (!rawMatches.length) return;
 
@@ -4690,6 +5020,8 @@ function editListedEntryQty(entryKey) {
     const mergedEntry = window.__listedEntryMap && window.__listedEntryMap[entryKey];
     if (!mergedEntry) return;
 
+    setInventoryReturnContextFromEntry(mergedEntry);
+
     openSimpleInputModal({
         mode: "listed-edit-qty",
         title: "Edit Quantity",
@@ -4706,6 +5038,8 @@ function editListedEntryQty(entryKey) {
 function editListedEntryNote(entryKey) {
     const mergedEntry = window.__listedEntryMap && window.__listedEntryMap[entryKey];
     if (!mergedEntry) return;
+
+    setInventoryReturnContextFromEntry(mergedEntry);
 
     openSimpleInputModal({
         mode: "listed-edit-note",
@@ -4871,15 +5205,48 @@ function renderListedSummary(summary, materials) {
         <canvas id="signature-pad" class="signature-pad"></canvas>
     </div>
 
-    <div class="signature-meta">
-        Signed:
-        <span id="signature-signed-at">
-            ${
+        <div class="signature-status-row">
+        <div class="signature-meta">
+            Signed:
+            <span id="signature-signed-at">
+                ${
+                    currentJob && currentJob.signature && currentJob.signature.signedAt
+                        ? new Date(currentJob.signature.signedAt).toLocaleString("en-GB")
+                        : "Not signed"
+                }
+            </span>
+        </div>
+
+                <div
+            id="signature-lock-badge"
+            class="signature-lock-badge"
+            style="${
                 currentJob && currentJob.signature && currentJob.signature.signedAt
-                    ? new Date(currentJob.signature.signedAt).toLocaleString("en-GB")
-                    : "Not signed"
-            }
-        </span>
+                    ? ""
+                    : "display:none;"
+            }"
+        >
+            <svg viewBox="0 0 24 24" class="signature-lock-icon" aria-hidden="true">
+                <path
+                    d="M8 10V7.8a4 4 0 1 1 8 0V10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                />
+                <rect
+                    x="6"
+                    y="10"
+                    width="12"
+                    height="10"
+                    rx="2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                />
+            </svg>
+            Locked
+        </div>
     </div>
 </div>
 
@@ -4946,32 +5313,36 @@ function isListedBoxItem(itemName) {
 }
 
 function sortListedRoomEntries(entries) {
-    return entries.slice().sort(function(a, b) {
-        const aExcluded = !!a.excluded;
-        const bExcluded = !!b.excluded;
+    return entries
+        .map(function(entry, index) {
+            return {
+                entry: entry,
+                index: index
+            };
+        })
+        .sort(function(a, b) {
+            const aExcluded = !!a.entry.excluded;
+            const bExcluded = !!b.entry.excluded;
 
-        // excluded always last
-        if (aExcluded !== bExcluded) {
-            return aExcluded ? 1 : -1;
-        }
+            // exclusions always last
+            if (aExcluded !== bExcluded) {
+                return aExcluded ? 1 : -1;
+            }
 
-        const aIsBox = isListedBoxItem(a.itemName);
-        const bIsBox = isListedBoxItem(b.itemName);
+            const aIsBox = isListedBoxItem(a.entry.itemName);
+            const bIsBox = isListedBoxItem(b.entry.itemName);
 
-        // normal items before boxes
-        if (aIsBox !== bIsBox) {
-            return aIsBox ? 1 : -1;
-        }
+            // boxes go below normal items
+            if (aIsBox !== bIsBox) {
+                return aIsBox ? 1 : -1;
+            }
 
-        // box order: AP / CG / BOOK / LINEN / WR
-        if (aIsBox && bIsBox) {
-            const boxDiff = getListedBoxOrder(a.itemName) - getListedBoxOrder(b.itemName);
-            if (boxDiff !== 0) return boxDiff;
-        }
-
-        // fallback alphabetical
-        return String(a.itemName || "").localeCompare(String(b.itemName || ""));
-    });
+            // within the same group, keep original add order
+            return a.index - b.index;
+        })
+        .map(function(item) {
+            return item.entry;
+        });
 }
 function groupInventoryItemsForListedView(items) {
     const grouped = {};
@@ -5215,10 +5586,18 @@ function initSignaturePad() {
     signaturePadCtx.lineJoin = "round";
     signaturePadCtx.lineWidth = 2.5;
     signaturePadCtx.strokeStyle = "#0f172a";
-
     signaturePadCtx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (currentJob && currentJob.signature && currentJob.signature.image) {
+    const hasSavedSignature = !!(
+        currentJob &&
+        currentJob.signature &&
+        currentJob.signature.image
+    );
+
+    signatureLocked = hasSavedSignature;
+    canvas.classList.toggle("locked", signatureLocked);
+
+    if (hasSavedSignature) {
         loadSignatureImageToCanvas(currentJob.signature.image);
     }
 
@@ -5252,6 +5631,7 @@ function getSignaturePoint(e) {
 
 function startSignatureDraw(e) {
     if (!signaturePadCtx) return;
+    if (signatureLocked) return;
 
     e.preventDefault();
 
@@ -5296,8 +5676,16 @@ function clearSignaturePad() {
     currentJob.signature.image = "";
     currentJob.signature.signedAt = "";
 
-    const signedAtEl = document.getElementById("signature-signed-at");
+    signatureLocked = false;
+    signaturePad.classList.remove("locked");
+
+        const signedAtEl = document.getElementById("signature-signed-at");
     if (signedAtEl) signedAtEl.innerText = "Not signed";
+
+    const lockBadge = document.getElementById("signature-lock-badge");
+    if (lockBadge) {
+        lockBadge.style.display = "none";
+    }
 
     saveToDevice();
 }
@@ -5312,9 +5700,17 @@ function saveSignaturePad() {
     currentJob.signature.image = signaturePad.toDataURL("image/png");
     currentJob.signature.signedAt = new Date().toISOString();
 
-    const signedAtEl = document.getElementById("signature-signed-at");
+    signatureLocked = true;
+    signaturePad.classList.add("locked");
+
+        const signedAtEl = document.getElementById("signature-signed-at");
     if (signedAtEl) {
         signedAtEl.innerText = new Date(currentJob.signature.signedAt).toLocaleString("en-GB");
+    }
+
+    const lockBadge = document.getElementById("signature-lock-badge");
+    if (lockBadge) {
+        lockBadge.style.display = "inline-flex";
     }
 
     saveToDevice();
@@ -5916,7 +6312,7 @@ window.onload = function () {
     </div>
 </div>
 
-<!-- SIMPLE INPUT MODAL --><!-- SIMPLE INPUT MODAL -->
+<!-- SIMPLE INPUT MODAL -->
 <div id="simple-input-overlay" class="simple-input-overlay" onclick="closeSimpleInputModal()">
     <div class="simple-input-panel" onclick="event.stopPropagation()">
         <div id="simple-input-title" class="simple-input-title">Enter Value</div>
