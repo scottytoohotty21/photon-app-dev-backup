@@ -2729,6 +2729,7 @@ renderInventoryDeliveryDropdown();
 renderInventoryRoomDropdown();
 renderInventoryFloorDropdown();
 renderInventoryButtons();
+loadManualScheduleFromActiveSequence();
 rebuildLiveInventoryFromSequence(activeSeqId);
 saveCalculatorFeedForActiveSequence();
 saveToDevice();
@@ -3938,7 +3939,7 @@ function updatePropData(f, v) {
         function loadProperty(id) { activePropId = parseInt(id); renderAddressUI(); }
      function loadSequence(id) {
     activeSeqId = id;
-
+    loadManualScheduleFromActiveSequence();
     if (!currentJob.inventory) currentJob.inventory = {};
     currentJob.inventory.activeSequenceId = id;
     currentJob.inventory.activeDeliveryId = null;
@@ -4016,7 +4017,18 @@ function updatePropData(f, v) {
         updateUndoButtonState();
         saveCalculatorFeedForActiveSequence();
     }
+    if (t === 'schedule') {
+        if (!activeSeqId && currentJob && currentJob.inventory && currentJob.inventory.activeSequenceId) {
+            activeSeqId = currentJob.inventory.activeSequenceId;
+        }
+        if (!activeSeqId) {
+            setActiveSequenceToDefault();
+        }
 
+        loadManualScheduleFromActiveSequence();
+        saveCalculatorFeedForActiveSequence();
+        renderScheduleCalculator();
+    }
     if (t === 'listed') {
         saveInventoryContext();
 
@@ -6653,9 +6665,83 @@ const TASK_OPTIONS = [
 function createId(){
     return `day_${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
 }
-let manualSchedule = [
-    { id: createId(), groupId: createId(), dayPart: "Full Day", task: "Pack", men: 2, hours: 8 }
-];
+let manualSchedule = getDefaultManualScheduleRows();
+function getActiveSequenceRecord() {
+    if (!currentJob || !Array.isArray(currentJob.sequences)) return null;
+
+    return currentJob.sequences.find(function(seq) {
+        return String(seq.id) === String(activeSeqId);
+    }) || null;
+}
+
+function ensureSequenceScheduleShape(seq) {
+    if (!seq) return null;
+
+    if (!seq.schedule) {
+        seq.schedule = createEmptySequenceSchedule();
+    }
+
+    if (!Array.isArray(seq.schedule.manualDays)) {
+        seq.schedule.manualDays = [];
+    }
+
+    if (!seq.schedule.special) {
+        seq.schedule.special = createEmptySequenceSchedule().special;
+    }
+
+    return seq.schedule;
+}
+
+function getDefaultManualScheduleRows() {
+    return [
+        { id: createId(), groupId: createId(), dayPart: "Full Day", task: "Pack", men: 2, hours: 8 }
+    ];
+}
+
+function loadManualScheduleFromActiveSequence() {
+    const seq = getActiveSequenceRecord();
+    if (!seq) {
+        manualSchedule = getDefaultManualScheduleRows();
+        return;
+    }
+
+    const schedule = ensureSequenceScheduleShape(seq);
+
+    if (!Array.isArray(schedule.manualDays) || schedule.manualDays.length === 0) {
+        schedule.manualDays = getDefaultManualScheduleRows();
+    }
+
+    manualSchedule = schedule.manualDays.map(function(day) {
+        return {
+            id: day.id || createId(),
+            groupId: day.groupId || createId(),
+            dayPart: day.dayPart || "Full Day",
+            task: day.task || "Pack",
+            men: Math.max(0, Number(day.men) || 0),
+            hours: Math.max(0, Number(day.hours) || 0)
+        };
+    });
+}
+
+function saveManualScheduleToActiveSequence() {
+    const seq = getActiveSequenceRecord();
+    if (!seq) return;
+
+    const schedule = ensureSequenceScheduleShape(seq);
+
+    schedule.manualDays = manualSchedule.map(function(day) {
+        return {
+            id: day.id,
+            groupId: day.groupId,
+            dayPart: day.dayPart,
+            task: day.task,
+            men: Math.max(0, Number(day.men) || 0),
+            hours: Math.max(0, Number(day.hours) || 0)
+        };
+    });
+
+    saveToDevice();
+}
 function getPhotonFeed() {
     const raw = localStorage.getItem("photon_calculator_feed");
 
@@ -6874,6 +6960,7 @@ function optionHtml(options, selected){
 function addScheduleDay(){
     const groupId = createId();
     manualSchedule.push({ id: createId(), groupId, dayPart: "Full Day", task: "Load", men: 2, hours: 8 });
+    saveManualScheduleToActiveSequence();
     renderScheduleCalculator();
 }
 
@@ -6883,8 +6970,9 @@ function removeScheduleDay(id){
     if (!row) return;
     manualSchedule = manualSchedule.filter(day => day.groupId !== row.groupId);
     if (manualSchedule.length === 0){
-        manualSchedule = [{ id: createId(), groupId: createId(), dayPart: "Full Day", task: "Pack", men: 2, hours: 8 }];
+        manualSchedule = getDefaultManualScheduleRows();
     }
+    saveManualScheduleToActiveSequence();
     renderScheduleCalculator();
 }
 
@@ -6958,6 +7046,7 @@ function updateScheduleDay(id, field, value){
         normalizeGroup(row.groupId);
     }
 
+    saveManualScheduleToActiveSequence();
     renderScheduleCalculator();
 }
 
