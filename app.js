@@ -5415,7 +5415,10 @@ if (materialOnlyCodes.includes(boxCode)) {
 }
 
 function addVolume(amount) {
-    const clickedBtn = event && event.currentTarget ? event.currentTarget : null;
+    const clickedBtn =
+        typeof event !== "undefined" && event && event.currentTarget
+            ? event.currentTarget
+            : null;
     const qtyInput = document.getElementById("inv-qty");
     const qty = getInventoryAddQty();
     const inventoryContext = getActiveInventoryContext();
@@ -5781,7 +5784,10 @@ function addInventoryItem(itemName, extraData) {
     return;
 }
 
-    const clickedBtn = event && event.currentTarget ? event.currentTarget : null;
+    const clickedBtn =
+        typeof event !== "undefined" && event && event.currentTarget
+            ? event.currentTarget
+            : null;
     const qtyInput = document.getElementById("inv-qty");
     const qty = getInventoryAddQty();
 
