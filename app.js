@@ -2212,6 +2212,12 @@ function refreshInventoryUndoStateAndFeed() {
     saveCalculatorFeedForActiveSequence();
 }
 
+function refreshInventorySelectionDisplayAndFeed() {
+    refreshCurrentInventorySelectionDisplay();
+    renderActionButtonStates();
+    saveCalculatorFeedForActiveSequence();
+}
+
 function handleInventoryDeliveryChange(value) {
     if (!currentJob) return;
     if (!currentJob.inventory) currentJob.inventory = {};
@@ -6939,9 +6945,7 @@ async function handleInventoryPhotoSelected(event) {
 
         saveToDevice();
         syncLiveInventoryFromRawForActiveSequence();
-        refreshCurrentInventorySelectionDisplay();
-        renderActionButtonStates();
-        saveCalculatorFeedForActiveSequence();
+        refreshInventorySelectionDisplayAndFeed();
 
         renderInventoryPhotoList(rawEntry);
     } catch (err) {
@@ -6975,9 +6979,7 @@ if (!confirmed) return;
 
     saveToDevice();
     syncLiveInventoryFromRawForActiveSequence();
-    refreshCurrentInventorySelectionDisplay();
-    renderActionButtonStates();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventorySelectionDisplayAndFeed();
 
     renderInventoryPhotoList(rawEntry);
 }
@@ -7189,9 +7191,7 @@ function saveWardrobeModal() {
     saveToDevice();
     syncLiveInventoryFromRawForActiveSequence();
     recalculateTotalVolume();
-    refreshCurrentInventorySelectionDisplay();
-    renderActionButtonStates();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventorySelectionDisplayAndFeed();
 
     closeWardrobeModal();
 }
@@ -7287,9 +7287,7 @@ function saveBedModal() {
     saveToDevice();
     syncLiveInventoryFromRawForActiveSequence();
     recalculateTotalVolume();
-    refreshCurrentInventorySelectionDisplay();
-    renderActionButtonStates();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventorySelectionDisplayAndFeed();
 
     closeBedModal();
 }
