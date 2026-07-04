@@ -1397,6 +1397,17 @@ function saveInventoryContext() {
         roomName: currentJob.inventory.activeRoomName || "Hallway"
     };
 }
+
+function getActiveInventoryContext() {
+    const inventory = currentJob && currentJob.inventory ? currentJob.inventory : {};
+
+    return {
+        sequenceId: activeSeqId || null,
+        deliveryId: inventory.activeDeliveryId || "",
+        roomName: inventory.activeRoomName || "Hallway",
+        floorName: inventory.activeFloor || "Ground"
+    };
+}
         
 
 // -----------------------------------------------------------------------------
@@ -5314,9 +5325,10 @@ if (materialOnlyCodes.includes(boxCode)) {
 
     const itemName = itemNameMap[boxCode] || (boxCode + " BOX");
 
-    const deliveryId = currentJob && currentJob.inventory ? currentJob.inventory.activeDeliveryId : "";
-    const roomName = currentJob && currentJob.inventory ? currentJob.inventory.activeRoomName : "";
-    const floorName = currentJob && currentJob.inventory ? currentJob.inventory.activeFloor : "";
+    const inventoryContext = getActiveInventoryContext();
+    const deliveryId = inventoryContext.deliveryId;
+    const roomName = inventoryContext.roomName;
+    const floorName = inventoryContext.floorName;
     const autoExportWrap = activeSequenceUsesFullExportPackAndWrap();
 
     const liveKey = getLiveInventoryGroupKey({
@@ -5826,7 +5838,7 @@ safeDetails: extraData.safeDetails || null
     }
 
     const rawEntryId = saveRawInventoryEntry({
-    sequenceId: activeSeqId,
+    sequenceId: inventoryContext.sequenceId,
     deliveryId: deliveryId,
     roomName: roomName,
     floorName: floorName,
