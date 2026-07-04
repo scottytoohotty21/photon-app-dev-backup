@@ -2415,24 +2415,6 @@ function getLiveInventoryEntryForRaw(rawEntryId) {
     }) || null;
 }
 
-function syncLiveItemFlagsFromRaw() {
-    const rawEntry = getLastRawInventoryEntry();
-    if (!rawEntry) return;
-
-    const liveItem = getLiveInventoryEntryForRaw(rawEntry.id);
-    if (!liveItem) return;
-
-    liveItem.dismantle = !!rawEntry.dismantle;
-    liveItem.expWrap = !!rawEntry.expWrap;
-    liveItem.disconnect = !!rawEntry.disconnect;
-    liveItem.handyman = !!rawEntry.handyman;
-    liveItem.excluded = !!rawEntry.excluded;
-    liveItem.note = rawEntry.note || "";
-    liveItem.damage = rawEntry.damage || "";
-    liveItem.crated = !!rawEntry.crated;
-    liveItem.crateDims = rawEntry.crateDims || null;
-}
-
 function recalculateTotalVolume() {
     totalVolume = inventoryItems.reduce(function(sum, i) {
         if (i.excluded) return sum;
