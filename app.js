@@ -6223,9 +6223,10 @@ function saveMiscModal() {
     const qty = getInventoryAddQty();
     const miscKey = "MISC-" + cleanName.toUpperCase();
 
-    const deliveryId = currentJob && currentJob.inventory ? currentJob.inventory.activeDeliveryId : "";
-    const roomName = currentJob && currentJob.inventory ? currentJob.inventory.activeRoomName : "";
-    const floorName = currentJob && currentJob.inventory ? currentJob.inventory.activeFloor : "";
+    const inventoryContext = getActiveInventoryContext();
+    const deliveryId = inventoryContext.deliveryId;
+    const roomName = inventoryContext.roomName;
+    const floorName = inventoryContext.floorName;
 
     const liveKey = getLiveInventoryGroupKey({
         itemName: cleanName,
@@ -6285,7 +6286,7 @@ function saveMiscModal() {
     }
 
     const rawEntryId = saveRawInventoryEntry({
-        sequenceId: activeSeqId,
+        sequenceId: inventoryContext.sequenceId,
         deliveryId: deliveryId,
         roomName: roomName,
         floorName: floorName,
