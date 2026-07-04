@@ -3092,9 +3092,7 @@ function handleRoomChange(value) {
 
     currentJob.inventory.activeSequenceId = activeSeqId || null;
     currentJob.inventory.activeRoomName = value;
-    resetInventoryQtyInput();
-    lastAddedItemName = null;
-    lastAddedRawEntryId = null;
+    resetInventorySelectionForContextChange();
 
     commitInventoryContextChange();
 }
@@ -3688,9 +3686,7 @@ function saveSimpleInputModal() {
 
         currentJob.inventory.activeRoomName = rawValue;
         renderInventoryRoomDropdown();
-        resetInventoryQtyInput();
-        lastAddedItemName = null;
-        lastAddedRawEntryId = null;
+        resetInventorySelectionForContextChange();
         saveToDevice();
         closeSimpleInputModal();
         return;
@@ -9881,6 +9877,13 @@ function resetInventoryQtyInput() {
     const qtyInput = document.getElementById("inv-qty");
     if (qtyInput) qtyInput.value = 1;
 }
+
+function resetInventorySelectionForContextChange() {
+    resetInventoryQtyInput();
+    lastAddedItemName = null;
+    lastAddedRawEntryId = null;
+}
+
 function openQtyOverride() {
     if (!lastAddedRawEntryId) return;
 
