@@ -2593,15 +2593,19 @@ function refreshInventoryVolumeDisplayForSequence(sequenceId) {
     }
 }
 
+function resetLiveInventoryForEmptySequence() {
+    lastAddedItemName = null;
+    lastAddedRawEntryId = null;
+    currentItemVolume = 0;
+    totalVolume = 0;
+    updateInventoryDisplay("No items added");
+}
+
 function syncInventoryDisplayFromSequence(sequenceId) {
     const rawItems = getRawInventoryItemsForSequence(sequenceId);
 
     if (!rawItems.length) {
-        lastAddedItemName = null;
-        lastAddedRawEntryId = null;
-        currentItemVolume = 0;
-        totalVolume = 0;
-        updateInventoryDisplay("No items added");
+        resetLiveInventoryForEmptySequence();
         return;
     }
 
@@ -2973,7 +2977,7 @@ function rebuildLiveInventoryFromSequence(sequenceId) {
     const rawItems = getRawInventoryItemsForSequence(sequenceId);
 
     if (!rawItems.length) {
-        updateInventoryDisplay("No items added");
+        resetLiveInventoryForEmptySequence();
         updateUndoButtonState();
         renderActionButtonStates();
         return;
