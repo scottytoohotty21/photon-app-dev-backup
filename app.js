@@ -5875,30 +5875,27 @@ safeDetails: extraData.safeDetails || null
     recalculateTotalVolume();
 
     updateInventoryDisplay(
-    qty + " X " + item.item.toUpperCase() + (autoExportWrap ? " [EXP WRAP]" : "")
-);
+        qty + " X " + item.item.toUpperCase() + (autoExportWrap ? " [EXP WRAP]" : "")
+    );
     triggerInventoryPulse("qty", "blue");
     triggerInventoryPulse("total", "blue");
     pulseInventoryButton(clickedBtn);
 
     if (qtyInput) qtyInput.value = 1;
-renderActionButtonStates();
-updateUndoButtonState();
-markCustomerSignatureInventoryChanged();
 
-markScheduleAutoBuildUpdateNeeded(
-    "Inventory has changed since this schedule was calculated.",
-    true
-);
+    refreshInventoryActionStateAndFeed();
+    markInventoryChangedAfterSignatureAndSchedule(
+        "Inventory has changed since this schedule was calculated.",
+        true
+    );
 
-saveCalculatorFeedForActiveSequence();
+    if (isBedInventoryItem(item.item)) {
+        addOrEditBedType();
+    }
 
-if (isBedInventoryItem(item.item)) {
-    addOrEditBedType();
-}
-if (isWardrobeInventoryItem(item.item)) {
-    addOrEditWardrobeType();
-}
+    if (isWardrobeInventoryItem(item.item)) {
+        addOrEditWardrobeType();
+    }
 }
 const CUSTOM_INVENTORY_ITEMS_STORAGE_KEY = "MOVEPILOT_CUSTOM_INVENTORY_ITEMS";
 let pendingCustomInventoryDeleteId = "";
