@@ -2196,6 +2196,14 @@ function renderInventoryContextDropdowns() {
     renderInventoryFloorDropdown();
 }
 
+function refreshActiveInventorySequenceView() {
+    rebuildLiveInventoryFromSequence(activeSeqId);
+    syncInventoryDisplayFromSequence(activeSeqId);
+    renderActionButtonStates();
+    updateUndoButtonState();
+    saveCalculatorFeedForActiveSequence();
+}
+
 function handleInventoryDeliveryChange(value) {
     if (!currentJob) return;
     if (!currentJob.inventory) currentJob.inventory = {};
@@ -2686,12 +2694,7 @@ function handleInventorySequenceChange(sequenceId) {
     renderInventorySequenceDropdown();
     renderInventoryContextDropdowns();
 
-    rebuildLiveInventoryFromSequence(activeSeqId);
-    syncInventoryDisplayFromSequence(activeSeqId);
-
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshActiveInventorySequenceView();
     saveToDevice();
 }
 
@@ -5144,11 +5147,7 @@ function switchTab(t) {
         renderInventorySequenceDropdown();
         renderInventoryContextDropdowns();
         renderInventoryButtons();
-        rebuildLiveInventoryFromSequence(activeSeqId);
-        syncInventoryDisplayFromSequence(activeSeqId);
-        renderActionButtonStates();
-        updateUndoButtonState();
-        saveCalculatorFeedForActiveSequence();
+        refreshActiveInventorySequenceView();
     }
 
     if (t === 'schedule') {
