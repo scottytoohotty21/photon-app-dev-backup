@@ -9960,7 +9960,13 @@ function getCleanInventoryQtyValue(rawValue) {
 
 function syncLiveInventoryFromRawForActiveSequence() {
     if (!currentJob || !activeSeqId) return;
+
+    const preservedHistory = inventoryHistory.slice();
+
     rebuildLiveInventoryFromSequence(activeSeqId);
+
+    inventoryHistory = preservedHistory;
+    updateUndoButtonState();
 }
 
 
