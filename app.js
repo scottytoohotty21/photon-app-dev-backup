@@ -2199,6 +2199,10 @@ function renderInventoryContextDropdowns() {
 function refreshActiveInventorySequenceView() {
     rebuildLiveInventoryFromSequence(activeSeqId);
     syncInventoryDisplayFromSequence(activeSeqId);
+    refreshInventoryActionStateAndFeed();
+}
+
+function refreshInventoryActionStateAndFeed() {
     renderActionButtonStates();
     updateUndoButtonState();
     saveCalculatorFeedForActiveSequence();
@@ -3888,9 +3892,7 @@ function saveSimpleInputModal() {
         }
 
         renderListedInventory();
-        renderActionButtonStates();
-        updateUndoButtonState();
-        saveCalculatorFeedForActiveSequence();
+        refreshInventoryActionStateAndFeed();
         closeSimpleInputModal();
         return;
     }
@@ -4015,9 +4017,7 @@ function saveSimpleInputModal() {
         }
 
         renderListedInventory();
-        renderActionButtonStates();
-        updateUndoButtonState();
-        saveCalculatorFeedForActiveSequence();
+        refreshInventoryActionStateAndFeed();
 
         closeSimpleInputModal();
         return;
@@ -5409,9 +5409,7 @@ if (materialOnlyCodes.includes(boxCode)) {
 
     if (qtyInput) qtyInput.value = 1;
 
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryActionStateAndFeed();
 }
 
 function addVolume(amount) {
@@ -5466,9 +5464,7 @@ function addVolume(amount) {
     pulseInventoryButton(clickedBtn);
 
     if (qtyInput) qtyInput.value = 1;
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryActionStateAndFeed();
 }
 
 function isWardrobeRawEntry(rawEntry) {
@@ -6577,9 +6573,7 @@ function saveListedCrateModal() {
     }
 
     renderListedInventory();
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryActionStateAndFeed();
     closeCrateModal();
 }
 function openAppSettingsModal() {
@@ -7593,9 +7587,7 @@ if (rawEntry.handyman) tags.push("[HANDYMAN]");
     const qtyInput = document.getElementById("inv-qty");
     if (qtyInput) qtyInput.value = 1;
 
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryActionStateAndFeed();
 }
 function updateInventoryDisplay(logText = "No items added") {
     const log = document.querySelector(".log-bar");
@@ -8331,9 +8323,7 @@ function deleteListedEntry(entryKey) {
     }
 
     renderListedInventory();
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryActionStateAndFeed();
     updateInventoryDisplay("LISTED LINE DELETED");
 }
 
@@ -8489,9 +8479,7 @@ function saveListedFlagsModal() {
     }
 
     renderListedInventory();
-    renderActionButtonStates();
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryActionStateAndFeed();
     updateInventoryDisplay("LISTED FLAGS UPDATED");
     closeListedFlagsModal();
 }
