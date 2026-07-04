@@ -2281,18 +2281,25 @@ function buildRawInventoryEntry(entryData) {
     return rawEntry;
 }
 
+function commitRawInventoryEntry(rawEntry) {
+    if (!rawEntry) return null;
+
+    ensureInventoryStore();
+
+    currentJob.inventory.items.push(rawEntry);
+    lastAddedRawEntryId = rawEntry.id;
+
+    return rawEntry.id;
+}
 
 function saveRawInventoryEntry(entryData) {
     if (!currentJob) return null;
 
-    ensureInventoryStore();
-
     const rawEntry = buildRawInventoryEntry(entryData);
-    currentJob.inventory.items.push(rawEntry);
-    lastAddedRawEntryId = rawEntry.id;
+    const rawEntryId = commitRawInventoryEntry(rawEntry);
 
     saveToDevice();
-    return rawEntry.id;
+    return rawEntryId;
 }
 
 function findRawInventoryEntry(rawEntryId) {
@@ -2948,32 +2955,32 @@ function buildLiveInventoryKeyFromValues(data) {
 }
 
 function getLiveInventoryGroupKey(entry) {
-    return [
-        String(entry.itemName || ""),
-        String(entry.roomName || ""),
-        String(entry.floorName || ""),
-        String(entry.deliveryId || ""),
-        Number(entry.unitVolume || 0),
-        !!entry.excluded,
-        !!entry.dismantle,
-        !!entry.expWrap,
-        !!entry.disconnect,
-        !!entry.handyman,
-        String(entry.note || ""),
-        String(entry.damage || ""),
-        String(entry.bedType || ""),
-        Array.isArray(entry.wardrobeTypes) ? entry.wardrobeTypes.join("|") : "",
-        entry.pianoDetails ? JSON.stringify(entry.pianoDetails) : "",
-        !!entry.crated,
-        entry.crateDims
-            ? [
-                entry.crateDims.l || "",
-                entry.crateDims.w || "",
-                entry.crateDims.h || "",
-                entry.crateDims.unit || ""
-            ].join("|")
-            : ""
-    ].join("||");
+    return buildLiveInventoryKeyFromValues(entry || {});
+}
+
+function createLiveInventoryItemFromRaw(entry, liveKey) {
+    return {
+        liveKey: liveKey,
+        item: entry.itemName,
+        displayName: entry.itemName,
+        volume: Number(entry.unitVolume || 0),
+        qty: Number(entry.qty || 0),
+        dismantle: !!entry.dismantle,
+        expWrap: !!entry.expWrap,
+        disconnect: !!entry.disconnect,
+        handyman: !!entry.handyman,
+        excluded: !!entry.excluded,
+        roomName: entry.roomName || "",
+        floorName: entry.floorName || "",
+        deliveryId: entry.deliveryId || "",
+        note: entry.note || "",
+        damage: entry.damage || "",
+        bedType: entry.bedType || "",
+        wardrobeTypes: Array.isArray(entry.wardrobeTypes) ? entry.wardrobeTypes : [],
+        pianoDetails: entry.pianoDetails || null,
+        crated: !!entry.crated,
+        crateDims: entry.crateDims || null
+    };
 }
 
 function rebuildLiveInventoryFromSequence(sequenceId) {
@@ -3000,34 +3007,12 @@ function rebuildLiveInventoryFromSequence(sequenceId) {
             return i.liveKey === liveKey;
         });
 
-        const unitVolume = Number(entry.unitVolume || 0);
         const qty = Number(entry.qty || 0);
 
         if (existing) {
             existing.qty += qty;
         } else {
-            inventoryItems.push({ 
-                liveKey: liveKey,
-                item: entry.itemName,
-                displayName: entry.itemName,
-                volume: unitVolume,
-                qty: qty,
-                dismantle: !!entry.dismantle,
-                expWrap: !!entry.expWrap,
-                disconnect: !!entry.disconnect,
-                handyman: !!entry.handyman,
-                excluded: !!entry.excluded,
-                roomName: entry.roomName || "",
-                floorName: entry.floorName || "",
-                deliveryId: entry.deliveryId || "",
-                note: entry.note || "",
-                damage: entry.damage || "",
-                bedType: entry.bedType || "",
-                wardrobeTypes: Array.isArray(entry.wardrobeTypes) ? entry.wardrobeTypes : [],
-                pianoDetails: entry.pianoDetails || null,
-                crated: !!entry.crated,
-                crateDims: entry.crateDims || null
-            });
+            inventoryItems.push(createLiveInventoryItemFromRaw(entry, liveKey));
         }
     });
 
@@ -6333,8 +6318,6 @@ function saveMiscModal() {
         previousQty: previousQty,
         rawEntryId: rawEntryId
     });
-
-    lastAddedRawEntryId = rawEntryId;
 
     syncLiveInventoryFromRawForActiveSequence();
     recalculateTotalVolume();
