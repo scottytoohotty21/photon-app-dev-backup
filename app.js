@@ -1626,9 +1626,7 @@ currentJob.costingQuote.selectedSequenceId = String(activeSeqId || getDefaultSeq
 
 renderAddressUI();
 renderInventorySequenceDropdown();
-renderInventoryDeliveryDropdown();
-renderInventoryRoomDropdown();
-renderInventoryFloorDropdown();
+renderInventoryContextDropdowns();
 renderInventoryButtons();
 updateInventoryHeaderReorderVisibility("");
 renderScheduleSequenceDropdown();
@@ -2192,6 +2190,12 @@ function renderInventoryDeliveryDropdown() {
     }).join('');
 }
 
+function renderInventoryContextDropdowns() {
+    renderInventoryDeliveryDropdown();
+    renderInventoryRoomDropdown();
+    renderInventoryFloorDropdown();
+}
+
 function handleInventoryDeliveryChange(value) {
     if (!currentJob) return;
     if (!currentJob.inventory) currentJob.inventory = {};
@@ -2680,9 +2684,7 @@ function handleInventorySequenceChange(sequenceId) {
     };
 
     renderInventorySequenceDropdown();
-    renderInventoryDeliveryDropdown();
-    renderInventoryRoomDropdown();
-    renderInventoryFloorDropdown();
+    renderInventoryContextDropdowns();
 
     rebuildLiveInventoryFromSequence(activeSeqId);
     syncInventoryDisplayFromSequence(activeSeqId);
@@ -5140,9 +5142,7 @@ function switchTab(t) {
         }
 
         renderInventorySequenceDropdown();
-        renderInventoryDeliveryDropdown();
-        renderInventoryRoomDropdown();
-        renderInventoryFloorDropdown();
+        renderInventoryContextDropdowns();
         renderInventoryButtons();
         rebuildLiveInventoryFromSequence(activeSeqId);
         syncInventoryDisplayFromSequence(activeSeqId);
