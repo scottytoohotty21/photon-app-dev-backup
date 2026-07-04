@@ -8312,11 +8312,10 @@ function deleteListedEntry(entryKey) {
         return !rawIdsToDelete.includes(raw.id);
     });
 
-    markScheduleAutoBuildUpdateNeeded(
+    markInventoryChangedAfterSignatureAndSchedule(
         "Inventory has changed since this schedule was calculated.",
         false
     );
-    markCustomerSignatureInventoryChanged();
     saveToDevice();
 
     if (String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
