@@ -5418,6 +5418,7 @@ function addVolume(amount) {
     const clickedBtn = event && event.currentTarget ? event.currentTarget : null;
     const qtyInput = document.getElementById("inv-qty");
     const qty = getInventoryAddQty();
+    const inventoryContext = getActiveInventoryContext();
 
     const volumeEntryName = "VOL-" + amount + "-" + Date.now();
     const displayName = amount + " CUFT";
@@ -5433,10 +5434,10 @@ function addVolume(amount) {
     });
 
     const rawEntryId = saveRawInventoryEntry({
-        sequenceId: activeSeqId,
-        deliveryId: currentJob && currentJob.inventory ? currentJob.inventory.activeDeliveryId : "",
-        roomName: currentJob && currentJob.inventory ? currentJob.inventory.activeRoomName : "",
-        floorName: currentJob && currentJob.inventory ? currentJob.inventory.activeFloor : "",
+        sequenceId: inventoryContext.sequenceId,
+        deliveryId: inventoryContext.deliveryId,
+        roomName: inventoryContext.roomName,
+        floorName: inventoryContext.floorName,
         itemName: displayName,
         qty: qty,
         unitVolume: amount,
@@ -5784,9 +5785,10 @@ function addInventoryItem(itemName, extraData) {
     const qtyInput = document.getElementById("inv-qty");
     const qty = getInventoryAddQty();
 
-    const deliveryId = currentJob && currentJob.inventory ? currentJob.inventory.activeDeliveryId : "";
-    const roomName = currentJob && currentJob.inventory ? currentJob.inventory.activeRoomName : "";
-    const floorName = currentJob && currentJob.inventory ? currentJob.inventory.activeFloor : "";
+    const inventoryContext = getActiveInventoryContext();
+    const deliveryId = inventoryContext.deliveryId;
+    const roomName = inventoryContext.roomName;
+    const floorName = inventoryContext.floorName;
     const autoExportWrap = activeSequenceUsesFullExportPackAndWrap();
 
     const liveKey = getLiveInventoryGroupKey({
