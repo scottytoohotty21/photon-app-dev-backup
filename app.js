@@ -2204,6 +2204,10 @@ function refreshActiveInventorySequenceView() {
 
 function refreshInventoryActionStateAndFeed() {
     renderActionButtonStates();
+    refreshInventoryUndoStateAndFeed();
+}
+
+function refreshInventoryUndoStateAndFeed() {
     updateUndoButtonState();
     saveCalculatorFeedForActiveSequence();
 }
@@ -2535,8 +2539,7 @@ function toggleItemAction(actionName) {
         triggerInventoryPulse("current", "blue");
         triggerInventoryPulse("total", "blue");
         triggerHaptic("light");
-        updateUndoButtonState();
-        saveCalculatorFeedForActiveSequence();
+        refreshInventoryUndoStateAndFeed();
         return;
     }
 
@@ -2553,8 +2556,7 @@ function toggleItemAction(actionName) {
         triggerInventoryPulse("current", "blue");
         triggerInventoryPulse("total", "blue");
         triggerHaptic("light");
-        updateUndoButtonState();
-        saveCalculatorFeedForActiveSequence();
+        refreshInventoryUndoStateAndFeed();
         return;
     }
 
@@ -2581,8 +2583,7 @@ function toggleItemAction(actionName) {
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
     triggerHaptic("light");
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryUndoStateAndFeed();
 }
 
 function removeRawInventoryEntry(rawEntryId) {
@@ -3943,8 +3944,7 @@ function saveSimpleInputModal() {
         triggerInventoryPulse("current", "blue");
         triggerInventoryPulse("total", "blue");
         triggerHaptic("medium");
-        updateUndoButtonState();
-        saveCalculatorFeedForActiveSequence();
+        refreshInventoryUndoStateAndFeed();
 
         closeSimpleInputModal();
         resetInventoryQtyInput();
@@ -6476,8 +6476,7 @@ function saveCrateModal() {
 
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryUndoStateAndFeed();
 
     closeCrateModal();
 }
@@ -6727,8 +6726,7 @@ function saveNoteModal() {
 
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryUndoStateAndFeed();
 
     closeNoteModal();
 }
@@ -7115,8 +7113,7 @@ function saveDamageModal() {
 
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
-    updateUndoButtonState();
-    saveCalculatorFeedForActiveSequence();
+    refreshInventoryUndoStateAndFeed();
 
     closeDamageModal();
 }
