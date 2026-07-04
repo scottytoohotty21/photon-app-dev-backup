@@ -2611,10 +2611,7 @@ function syncInventoryDisplayFromSequence(sequenceId) {
     lastAddedItemName = lastRaw.itemName || null;
     currentItemVolume = lastRaw.excluded ? 0 : Number(lastRaw.totalVolume || 0);
 
-    totalVolume = rawItems.reduce(function(sum, entry) {
-        if (entry.excluded) return sum;
-        return sum + Number(entry.totalVolume || 0);
-    }, 0);
+    totalVolume = getSequenceInventoryTotal(sequenceId);
 
     const tags = [];
 
@@ -2998,18 +2995,13 @@ function rebuildLiveInventoryFromSequence(sequenceId) {
         }
     });
 
-    const rawSequenceTotal = rawItems.reduce(function(sum, entry) {
-        if (entry.excluded) return sum;
-        return sum + Number(entry.totalVolume || 0);
-    }, 0);
-
     const lastRaw = rawItems[rawItems.length - 1] || null;
 
     lastAddedRawEntryId = lastRaw ? lastRaw.id : null;
     lastAddedItemName = lastRaw ? lastRaw.itemName : null;
 
     currentItemVolume = 0;
-    totalVolume = rawSequenceTotal;
+    totalVolume = getSequenceInventoryTotal(sequenceId);
 
     updateInventoryDisplay("Sequence restored");
     updateUndoButtonState();
