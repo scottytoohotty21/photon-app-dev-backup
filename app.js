@@ -3684,10 +3684,11 @@ function saveSimpleInputModal() {
             currentJob.inventory.customRooms.push(rawValue);
         }
 
+        currentJob.inventory.activeSequenceId = activeSeqId || null;
         currentJob.inventory.activeRoomName = rawValue;
         renderInventoryRoomDropdown();
         resetInventorySelectionForContextChange();
-        saveToDevice();
+        commitInventoryContextChange();
         closeSimpleInputModal();
         return;
     }
@@ -3719,9 +3720,10 @@ function saveSimpleInputModal() {
             currentJob.inventory.customFloors.push(floorLabel);
         }
 
+        currentJob.inventory.activeSequenceId = activeSeqId || null;
         currentJob.inventory.activeFloor = floorLabel;
         renderInventoryFloorDropdown();
-        saveToDevice();
+        commitInventoryContextChange();
         closeSimpleInputModal();
         return;
     }
@@ -3747,9 +3749,10 @@ function saveSimpleInputModal() {
             currentJob.inventory.customFloors.push(rawValue);
         }
 
+        currentJob.inventory.activeSequenceId = activeSeqId || null;
         currentJob.inventory.activeFloor = rawValue;
         renderInventoryFloorDropdown();
-        saveToDevice();
+        commitInventoryContextChange();
         closeSimpleInputModal();
         return;
     }
