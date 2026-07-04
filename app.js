@@ -5379,7 +5379,7 @@ if (materialOnlyCodes.includes(boxCode)) {
     }
 
     const rawEntryId = saveRawInventoryEntry({
-        sequenceId: activeSeqId,
+        sequenceId: inventoryContext.sequenceId,
         deliveryId: deliveryId,
         roomName: roomName,
         floorName: floorName,
