@@ -7451,6 +7451,11 @@ function undoLastInventoryAction() {
 
         if (action.rawEntryId) {
             removeRawInventoryEntry(action.rawEntryId);
+            if (String(lastAddedRawEntryId || "") === String(action.rawEntryId)) {
+                lastAddedRawEntryId = null;
+                lastAddedItemName = null;
+            }
+            syncLiveInventoryFromRawForActiveSequence();
         }
 
         recalculateTotalVolume();
@@ -7466,6 +7471,11 @@ function undoLastInventoryAction() {
 
         if (action.rawEntryId) {
             removeRawInventoryEntry(action.rawEntryId);
+            if (String(lastAddedRawEntryId || "") === String(action.rawEntryId)) {
+                lastAddedRawEntryId = null;
+                lastAddedItemName = null;
+            }
+            syncLiveInventoryFromRawForActiveSequence();
         }
 
         recalculateTotalVolume();
