@@ -6325,9 +6325,8 @@ function saveMiscModal() {
 
     triggerInventoryPulse("current", "blue");
     triggerInventoryPulse("total", "blue");
-    updateUndoButtonState();
-    renderActionButtonStates();
-    saveCalculatorFeedForActiveSequence();
+
+    refreshInventoryActionStateAndFeed();
     saveToDevice();
 
     if (qtyInput) qtyInput.value = 1;
