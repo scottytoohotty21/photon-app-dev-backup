@@ -1408,6 +1408,11 @@ function getActiveInventoryContext() {
         floorName: inventory.activeFloor || "Ground"
     };
 }
+
+function commitInventoryContextChange() {
+    saveInventoryContext();
+    saveToDevice();
+}
         
 
 // -----------------------------------------------------------------------------
@@ -2194,8 +2199,7 @@ function handleInventoryDeliveryChange(value) {
     currentJob.inventory.activeSequenceId = activeSeqId || null;
     currentJob.inventory.activeDeliveryId = value;
 
-    saveInventoryContext();
-    saveToDevice();
+    commitInventoryContextChange();
 }
 
 // Raw inventory store
@@ -3092,8 +3096,7 @@ function handleRoomChange(value) {
     lastAddedItemName = null;
     lastAddedRawEntryId = null;
 
-    saveInventoryContext();
-    saveToDevice();
+    commitInventoryContextChange();
 }
 
 function getFloorOptions() {
@@ -3193,8 +3196,7 @@ function handleFloorChange(value) {
     currentJob.inventory.activeSequenceId = activeSeqId || null;
     currentJob.inventory.activeFloor = value;
 
-    saveInventoryContext();
-    saveToDevice();
+    commitInventoryContextChange();
 }
 
 // Inventory button order, search, and rendering
