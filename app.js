@@ -8228,12 +8228,8 @@ function setInventoryReturnContextFromEntry(entry) {
 }
 
 // Listed item editing and raw-entry matching
-function getRawEntriesForListedEntry(entry) {
-    if (!currentJob || !currentJob.inventory || !Array.isArray(currentJob.inventory.items)) {
-        return [];
-    }
-
-    const crateText = entry.crated && entry.crateDims
+function getListedMatchCrateText(entry) {
+    return entry && entry.crated && entry.crateDims
         ? [
             entry.crateDims.l || "",
             entry.crateDims.w || "",
@@ -8241,25 +8237,28 @@ function getRawEntriesForListedEntry(entry) {
             entry.crateDims.unit || ""
         ].join("|")
         : "";
+}
 
-    const safeText = entry.safeDetails
+function getListedMatchSafeText(entry) {
+    return entry && entry.safeDetails
         ? JSON.stringify(entry.safeDetails)
         : "";
+}
+
+function getListedMatchWardrobeText(entry) {
+    return String(Array.isArray(entry && entry.wardrobeTypes) ? entry.wardrobeTypes.join("|") : "");
+}
+
+function getRawEntriesForListedEntry(entry) {
+    if (!currentJob || !currentJob.inventory || !Array.isArray(currentJob.inventory.items)) {
+        return [];
+    }
+
+    const crateText = getListedMatchCrateText(entry);
+    const safeText = getListedMatchSafeText(entry);
+    const wardrobeText = getListedMatchWardrobeText(entry);
 
     return currentJob.inventory.items.filter(function(raw) {
-        const rawCrateText = raw.crated && raw.crateDims
-            ? [
-                raw.crateDims.l || "",
-                raw.crateDims.w || "",
-                raw.crateDims.h || "",
-                raw.crateDims.unit || ""
-            ].join("|")
-            : "";
-
-        const rawSafeText = raw.safeDetails
-            ? JSON.stringify(raw.safeDetails)
-            : "";
-
         return (
             String(raw.sequenceId || "") === String(entry.sequenceId || "") &&
             String(raw.deliveryId || "") === String(entry.deliveryId || "") &&
@@ -8275,10 +8274,10 @@ function getRawEntriesForListedEntry(entry) {
             String(raw.note || "") === String(entry.note || "") &&
             String(raw.damage || "") === String(entry.damage || "") &&
             String(raw.bedType || "") === String(entry.bedType || "") &&
-            String(Array.isArray(raw.wardrobeTypes) ? raw.wardrobeTypes.join("|") : "") === String(Array.isArray(entry.wardrobeTypes) ? entry.wardrobeTypes.join("|") : "") &&
+            getListedMatchWardrobeText(raw) === wardrobeText &&
             !!raw.crated === !!entry.crated &&
-            rawCrateText === crateText &&
-            rawSafeText === safeText
+            getListedMatchCrateText(raw) === crateText &&
+            getListedMatchSafeText(raw) === safeText
         );
     });
 }
