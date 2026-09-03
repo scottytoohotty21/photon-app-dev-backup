@@ -7578,6 +7578,7 @@ if (rawEntry.handyman) tags.push("[HANDYMAN]");
     const qtyInput = document.getElementById("inv-qty");
     if (qtyInput) qtyInput.value = 1;
 
+    renderListedInventory();
     refreshInventoryActionStateAndFeed();
 }
 function updateInventoryDisplay(logText = "No items added") {
@@ -9690,6 +9691,8 @@ function renderListedInventory() {
     const container = document.getElementById("listed-inventory-output");
     if (!container || !currentJob) return;
 
+    window.__listedEntryMap = {};
+
     const allItems = getListedInventoryItems();
     renderListedInventoryFilters(allItems);
 
@@ -9710,8 +9713,6 @@ const materialsSummary = buildMaterialsSummary(filteredItems);
 
 renderListedSummary(listedSummary, materialsSummary, filteredItems);
 renderListedPhotoReview(filteredItems);
-
-window.__listedEntryMap = {};
     const groupedSections = groupInventoryItemsForListedView(filteredItems);
 
     if (groupedSections.length === 0) {
