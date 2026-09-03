@@ -2218,6 +2218,17 @@ function refreshInventorySelectionDisplayAndFeed() {
     saveCalculatorFeedForActiveSequence();
 }
 
+function finishListedInventoryEdit(mergedEntry) {
+    saveToDevice();
+
+    if (mergedEntry && String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
+        rebuildLiveInventoryFromSequence(activeSeqId);
+    }
+
+    renderListedInventory();
+    refreshInventoryActionStateAndFeed();
+}
+
 function handleInventoryDeliveryChange(value) {
     if (!currentJob) return;
     if (!currentJob.inventory) currentJob.inventory = {};
@@ -3892,14 +3903,7 @@ function saveSimpleInputModal() {
             "Inventory quantity has changed since this schedule was calculated.",
             false
         );
-        saveToDevice();
-
-        if (String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
-            rebuildLiveInventoryFromSequence(activeSeqId);
-        }
-
-        renderListedInventory();
-        refreshInventoryActionStateAndFeed();
+        finishListedInventoryEdit(mergedEntry);
         closeSimpleInputModal();
         return;
     }
@@ -4016,14 +4020,7 @@ function saveSimpleInputModal() {
             "Inventory notes have changed since this schedule was calculated.",
             false
         );
-        saveToDevice();
-
-        if (String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
-            rebuildLiveInventoryFromSequence(activeSeqId);
-        }
-
-        renderListedInventory();
-        refreshInventoryActionStateAndFeed();
+        finishListedInventoryEdit(mergedEntry);
 
         closeSimpleInputModal();
         return;
@@ -6567,14 +6564,7 @@ function saveListedCrateModal() {
         };
     });
 
-    saveToDevice();
-
-    if (String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
-        rebuildLiveInventoryFromSequence(activeSeqId);
-    }
-
-    renderListedInventory();
-    refreshInventoryActionStateAndFeed();
+    finishListedInventoryEdit(mergedEntry);
     closeCrateModal();
 }
 function openAppSettingsModal() {
@@ -8316,14 +8306,7 @@ function deleteListedEntry(entryKey) {
         "Inventory has changed since this schedule was calculated.",
         false
     );
-    saveToDevice();
-
-    if (String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
-        rebuildLiveInventoryFromSequence(activeSeqId);
-    }
-
-    renderListedInventory();
-    refreshInventoryActionStateAndFeed();
+    finishListedInventoryEdit(mergedEntry);
     updateInventoryDisplay("LISTED LINE DELETED");
 }
 
@@ -8465,21 +8448,15 @@ function saveListedFlagsModal() {
         "Inventory flags have changed since this schedule was calculated.",
         false
     );
-    saveToDevice();
-
     if (wantsCrate && !hadCrateBefore) {
+        saveToDevice();
         const entryKey = listedFlagsEntryKey;
         closeListedFlagsModal();
         openListedCrateModal(entryKey);
         return;
     }
 
-    if (String(activeSeqId || "") === String(mergedEntry.sequenceId || "")) {
-        rebuildLiveInventoryFromSequence(activeSeqId);
-    }
-
-    renderListedInventory();
-    refreshInventoryActionStateAndFeed();
+    finishListedInventoryEdit(mergedEntry);
     updateInventoryDisplay("LISTED FLAGS UPDATED");
     closeListedFlagsModal();
 }
